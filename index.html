@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>배타기 체험: 모험과 성장의 여정</title>
+  <style>
+    @font-face {
+      font-family: 'SokchoBadaBatang';
+      src: url('./fonts/SokchoBadaBatang.woff2') format('woff2'),
+           url('./fonts/SokchoBadaBatang.woff') format('woff');
+      font-weight: normal;
+      font-style: normal;
+    }
+    body {
+      font-family: 'SokchoBadaBatang', 'Noto Sans KR', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      background: #e3f2fd;
+      font-size: 16px;
+      line-height: 1.5;
+      color: #333333;
+      overflow-x: hidden;
+    }
+    button, input, select, textarea, table, th, td, details, summary {
+      font-family: 'SokchoBadaBatang', 'Noto Sans KR', Arial, sans-serif !important;
+    }
+    .hero {
+      position: relative;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.8)), url('https://i.imgur.com/B3EwCsM.jpeg') center/cover no-repeat;
+    }
+    .hero-content {
+      color: white;
+      text-shadow: 3px 3px 7px rgba(0,0,0,0.9);
+      background: rgba(0,0,0,0.7);
+      padding: 15px;
+      border-radius: 5px;
+      max-width: 600px;
+      width: 90%;
+      margin: auto;
+      box-sizing: border-box;
+    }
+    .hero-content h1 {
+      font-size: 2.2em;
+      font-weight: 700;
+      margin: 0 0 10px;
+    }
+    .hero-content p {
+      font-size: 1em;
+      margin: 0 0 15px;
+    }
+    .urgency {
+      color: #d32f2f;
+      font-weight: bold;
+      font-size: 1.1em;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+      margin: 10px 0;
+    }
+    .timer {
+      color: #d32f2f;
+      font-size: 1.2em;
+      font-weight: bold;
+      margin: 10px 0;
+    }
+    .hero-cta {
+      position: absolute;
+      bottom: 20px;
+      width: 100%;
+      max-width: 600px;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .footer-cta {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 20px 0;
+    }
+    .cta-button {
+      background: rgba(211, 47, 47, 0.9);
+      color: white;
+      padding: 10px 20px;
+      font-size: 1em;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+      transition: background 0.3s;
+      min-width: 250px;
+    }
+    .cta-button:hover {
+      background: rgba(183, 28, 28, 0.9);
+    }
+    .section {
+      padding: 40px 20px;
+      max-width: 800px;
+      margin: auto;
+    }
+    .experience {
+      background: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+    }
+    .experience-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 20px 0;
+    }
+    .experience-item img {
+      width: 100%;
+      max-width: 600px;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+      margin-bottom: 15px;
+      transition: transform 0.5s;
+      object-fit: cover;
+      loading: lazy;
+    }
+    .experience-item img:hover {
+      transform: scale(1.05);
+    }
+    .experience-item h3 {
+      font-size: 1.5em;
+      color: #1e88e5;
+      margin: 0 0 10px;
+    }
+    .experience-item p {
+      font-size: 0.95em;
+      color: #555;
+      max-width: 600px;
+    }
+    .video-preview {
+      background: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+    }
+    .video-thumbnail {
+      position: relative;
+      display: block;
+      width: 100%;
+      max-width: 400px;
+      height: auto;
+      aspect-ratio: 16/9;
+      border-radius: 10px;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+      margin: 15px auto;
+      transition: transform 0.3s;
+    }
+    .video-thumbnail img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+    .video-thumbnail:hover {
+      transform: scale(1.05);
+    }
+    .play-button {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 0;
+      height: 0;
+      border-left: 30px solid #d32f2f;
+      border-top: 20px solid transparent;
+      border-bottom: 20px solid transparent;
+      opacity: 0.8;
+      transition: opacity 0.3s;
+    }
+    .video-thumbnail:hover .play-button {
+      opacity: 1;
+    }
+    .reviews {
+      background: #f5faff;
+      border-radius: 10px;
+    }
+    .social-proof {
+      color: #1e88e5;
+      font-size: 1em;
+      margin: 10px 0;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .review {
+      margin: 15px 20px;
+      font-style: italic;
+      font-size: 0.9em;
+      border-left: 3px solid #5baed8;
+      padding-left: 15px;
+    }
+    .review::before {
+      content: '⭐⭐⭐⭐⭐ ';
+      color: #f57c00;
+    }
+    .review-img {
+      width: 100%;
+      max-width: 300px;
+      height: auto;
+      border-radius: 10px;
+      margin: 10px auto;
+      display: block;
+      loading: lazy;
+    }
+    .collage {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      max-width: 500px;
+      margin: 10px auto;
+      aspect-ratio: 1/1;
+    }
+    .collage-img {
+      width: 100%;
+      max-height: 120px;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      border-radius: 5px;
+      transform: rotate(-5deg);
+      transition: transform 0.3s;
+      loading: lazy;
+    }
+    .collage-img:nth-child(2) { transform: rotate(5deg); }
+    .collage-img:nth-child(3) { transform: rotate(3deg); }
+    .collage-img:nth-child(4) { transform: rotate(-3deg); }
+    .collage-img:hover { transform: scale(1.1) rotate(0deg); }
+    .team-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+      margin-top: 20px;
+    }
+    .team-img {
+      width: 100%;
+      max-width: 600px;
+      height: auto;
+      object-fit: cover;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      loading: lazy;
+    }
+    .overview table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 0.95em;
+    }
+    .overview td {
+      border: 1px solid #dddddd;
+      padding: 10px;
+      text-align: left;
+    }
+    .overview .camp-info {
+      font-size: 0.9em;
+      color: #1e88e5;
+      margin: 10px 0;
+    }
+    .faq details {
+      margin: 10px 0;
+      text-align: left;
+    }
+    .faq summary {
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 0.95em;
+      padding: 10px;
+    }
+    .faq summary::before {
+      content: '✅ ';
+    }
+    .faq p {
+      margin: 5px 0 10px 25px;
+      font-size: 0.9em;
+      line-height: 1.3;
+    }
+    .floating-cta {
+      position: fixed;
+      bottom: 15px;
+      right: 15px;
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .floating-cta .cta-button {
+      padding: 10px 20px;
+      font-size: 1em;
+      min-width: 250px;
+    }
+    .modal, .success-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 2000;
+    }
+    .modal-content, .success-modal-content {
+      background: #ffffff;
+      width: 90%;
+      max-width: 350px;
+      margin: 10% auto;
+      padding: 20px;
+      border-radius: 10px;
+      position: relative;
+      max-height: 80vh;
+      overflow-y: auto;
+      min-height: 300px;
+    }
+    .close {
+      position: absolute;
+      right: 15px;
+      top: 10px;
+      font-size: 20px;
+      cursor: pointer;
+      color: #333333;
+    }
+    .modal input, .modal select, .modal button, .modal label, .modal p {
+      width: 100%;
+      padding: 8px;
+      margin: 5px 0;
+      border: 1px solid #dddddd;
+      border-radius: 3px;
+      font-size: 0.9em;
+      box-sizing: border-box;
+    }
+    .modal input[type="checkbox"] {
+      width: auto;
+      margin-right: 10px;
+    }
+    .modal label {
+      display: flex;
+      align-items: center;
+      padding: 0;
+      border: none;
+      font-size: 0.9em;
+      color: #555;
+    }
+    .modal p.note {
+      color: #d32f2f;
+      font-size: 0.9em;
+      margin: 5px 0;
+      padding: 0;
+      border: none;
+    }
+    .modal button.cta-button {
+      position: sticky;
+      bottom: 0;
+      background: rgba(211, 47, 47, 0.9);
+      z-index: 10;
+    }
+    .success-modal-content ul {
+      list-style: none;
+      padding: 0;
+      font-size: 0.9em;
+      text-align: left;
+    }
+    .success-modal-content ul li {
+      margin: 5px 0;
+    }
+    .success-modal-content li::before {
+      content: '✅ ';
+    }
+    .success-modal-content .optional {
+      color: #1e88e5;
+    }
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @media (max-width: 768px) {
+      .hero {
+        height: 85vh;
+        padding-top: 20px;
+      }
+      .hero-content {
+        width: 90%;
+        padding: 15px;
+      }
+      .hero-content h1 {
+        font-size: 1.5em;
+      }
+      .hero-content p {
+        font-size: 0.8em;
+      }
+      .urgency {
+        font-size: 0.95em;
+      }
+      .timer {
+        font-size: 1em;
+      }
+      .hero-cta {
+        bottom: 15px;
+        max-width: 90%;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .footer-cta {
+        flex-direction: column;
+        gap: 8px;
+        max-width: 90%;
+      }
+      .cta-button {
+        font-size: 0.95em;
+        padding: 8px 16px;
+        min-width: 100%;
+      }
+      .floating-cta .cta-button {
+        padding: 8px 16px;
+        font-size: 0.95em;
+        min-width: 220px;
+      }
+      .experience-item img {
+        max-width: 90%;
+      }
+      .experience-item h3 {
+        font-size: 1.3em;
+      }
+      .video-thumbnail {
+        max-width: 80%;
+      }
+      .play-button {
+        border-left: 25px solid #d32f2f;
+        border-top: 15px solid transparent;
+        border-bottom: 15px solid transparent;
+      }
+      .review {
+        font-size: 0.85em;
+      }
+      .social-proof {
+        font-size: 0.95em;
+        max-width: 90%;
+      }
+      .collage {
+        max-width: 80%;
+      }
+      .collage-img {
+        max-height: 100px;
+      }
+      .team-img {
+        max-width: 90%;
+      }
+      .overview table {
+        font-size: 0.9em;
+      }
+      .modal-content, .success-modal-content {
+        margin: 10% auto;
+      }
+      .modal input, .modal select, .modal button, .modal label, .modal p {
+        padding: 7px;
+        font-size: 0.85em;
+      }
+      .modal p.note {
+        font-size: 0.85em;
+      }
+      body {
+        font-size: 0.95em;
+      }
+    }
+    @media (max-width: 375px) {
+      .hero-content {
+        width: 90%;
+      }
+      .hero-content h1 {
+        font-size: 1.4em;
+      }
+      .hero-content p {
+        font-size: 0.75em;
+      }
+      .urgency {
+ Hints: .urgency {
+        font-size: 0.9em;
+      }
+      .timer {
+        font-size: 0.9em;
+      }
+      .hero-cta {
+        bottom: 15px;
+        max-width: 100%;
+      }
+      .cta-button {
+        font-size: 0.9em;
+        padding: 8px 12px;
+      }
+      .floating-cta .cta-button {
+        padding: 8px 12px;
+        font-size: 0.85em;
+        min-width: 200px;
+      }
+      .experience-item img {
+        max-width: 100%;
+      }
+      .experience-item h3 {
+        font-size: 1.2em;
+      }
+      .video-thumbnail {
+        max-width: 90%;
+      }
+      .play-button {
+        border-left: 20px solid #d32f2f;
+        border-top: 12px solid transparent;
+        border-bottom: 12px solid transparent;
+      }
+      .collage {
+        max-width: 90%;
+      }
+      .collage-img {
+        max-height: 80px;
+      }
+      .team-img {
+        max-width: 100%;
+      }
+      .section h2 {
+        font-size: 1.3em;
+      }
+      .section p {
+        font-size: 0.85em;
+      }
+      .overview table {
+        font-size: 0.85em;
+      }
+      .social-proof {
+        font-size: 0.9em;
+        max-width: 90%;
+      }
+      .modal input, .modal select, .modal button, .modal label, .modal p {
+        padding: 6px;
+        font-size: 0.8em;
+      }
+      .modal p.note {
+        font-size: 0.8em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Hero Section -->
+  <div class="hero">
+    <div class="hero-content fade-in">
+      <h1>내가 만든 배로, 자연 속으로 들어가다</h1>
+      <p>여름 강바람 속에서 아이들이 모험하며 배움을 키웁니다.</p>
+      <p>내 손으로 만든 배로 노를 저으며 성장하는 체험!</p>
+      <p class="urgency">8월 16~17일 체험 진행, 8월 2일까지 신청 마감</p>
+      <div id="countdown" class="timer"></div>
+    </div>
+    <div class="hero-cta">
+      <button class="cta-button" onclick="openModal('8/16(토) PM 3~5시')">8/16(토) PM 3~5시 신청하기</button>
+      <button class="cta-button" onclick="openModal('8/17(일) PM 3~5시')">8/17(일) PM 3~5시 신청하기</button>
+    </div>
+  </div>
+
+  <!-- Experience Section -->
+  <div class="section experience">
+    <h2>2시간의 모험과 성장</h2>
+    <div class="experience-item fade-in">
+      <img src="https://i.imgur.com/jOznC1t.jpeg" alt="배 만들기">
+      <h3>배를 만들다</h3>
+      <p>6만 년 전 시작된 배의 역사. 아이 스스로 공기 펌프로 배를 만들며, 과거와 연결된 생명의 감각을 깨웁니다.</p>
+    </div>
+    <div class="experience-item fade-in">
+      <img src="https://i.imgur.com/ibCaNiu.jpeg" alt="항해 체험">
+      <h3>물 위를 나아가다</h3>
+      <p>완성된 배에 올라, 아이 스스로 노를 저어 나아갑니다. 독립과 관계의 감각이 물결 위에서 자랍니다.</p>
+    </div>
+    <div class="experience-item fade-in">
+      <img src="https://i.imgur.com/LaYwe6q.jpeg" alt="감정 나누기">
+      <h3>마음을 나누다</h3>
+      <p>체험을 마친 뒤, 공감카드로 자신의 감정을 나눕니다. 비폭력대화로 감정과 연결되는 법을 배웁니다.</p>
+    </div>
+  </div>
+
+  <!-- Video Preview Section -->
+  <div class="section video-preview">
+    <h2>체험 미리보기</h2>
+    <a href="https://youtu.be/yXmGzKg2sqY" target="_blank" rel="noopener" class="video-thumbnail fade-in">
+      <picture>
+        <source srcset="https://img.youtube.com/vi/yXmGzKg2sqY/maxresdefault.jpg" type="image/jpeg">
+        <img src="https://img.youtube.com/vi/yXmGzKg2sqY/hqdefault.jpg" alt="체험 미리보기 영상">
+      </picture>
+      <div class="play-button"></div>
+    </a>
+    <p>영상으로 체험 미리보기!</p>
+  </div>
+
+  <!-- Reviews Section -->
+  <div class="section reviews">
+    <h2>아이와 부모의 이야기</h2>
+    <p class="social-proof">100+ 가족이 참여한 성장의 여정!</p>
+    <div class="review fade-in">
+      <p>"자유와 조화를 느꼈어요. 처음 보는 친구들과 어울려 놀면서 새로운 경험을 했어요." – 민서 (12세)</p>
+    </div>
+    <div class="review fade-in">
+      <p>"아이가 배 만들며 자신감이 커졌어요. 소감 나누기 시간에 감정을 표현하는 모습을 보니 뿌듯했어요." – 박지영 (부모)</p>
+    </div>
+    <div class="review fade-in">
+      <p>"도전과 보람을 배웠어요. 무서웠지만 배를 직접 타고 성공했어요!" – 준호 (11세)</p>
+    </div>
+    <div class="collage">
+      <img src="https://i.imgur.com/SFGRjUO.jpeg" alt="후기 이미지 1" class="collage-img">
+      <img src="https://i.imgur.com/LMd8soC.jpeg" alt="후기 이미지 2" class="collage-img">
+      <img src="https://i.imgur.com/9PgwdeI.jpeg" alt="후기 이미지 3" class="collage-img">
+      <img src="https://i.imgur.com/76S4ndK.jpeg" alt="후기 이미지 4" class="collage-img">
+    </div>
+    <img src="https://i.imgur.com/n2CA4Kz.png" alt="공감카드" class="review-img">
+    <p>내면 성장을 돕는 공감 카드를 활용합니다.</p>
+  </div>
+
+  <!-- Program Overview -->
+  <div class="section overview">
+    <h2>프로그램 개요</h2>
+    <table>
+      <tr><td>참가방법</td><td>신청 후 문자 안내</td></tr>
+      <tr><td>장소</td><td>곡성 죽곡 카누캠핑장</td></tr>
+      <tr><td>비용</td><td>1인 4만원, 2인 8만원, 3인 12만원</td></tr>
+      <tr><td>체험</td><td>배 만들기, 항해, 소감 공유(2시간)</td></tr>
+      <tr><td>참가 조건</td><td>8~9세 (부모 1명 동반 필수, 최소 2인 8만원), 10~13세 (독립 가능)</td></tr>
+      <tr><td>체험 일정</td><td>8/16(토), 8/17(일) PM 3~5시</td></tr>
+    </table>
+    <p class="camp-info">📌 일일 캠프를 넘어, 계절 캠프에서 더 깊은 모험과 성장이 가능합니다!</p>
+  </div>
+
+  <!-- FAQ Section -->
+  <div class="section faq">
+    <h2>자주 묻는 질문</h2>
+    <details open>
+      <summary>물놀이를 할 수 있나요?</summary>
+      <p>체험과 함께 간단한 물놀이를 즐길 수 있습니다.</p>
+      <p>수영복과 여벌 옷을 챙겨주세요.</p>
+    </details>
+    <details open>
+      <summary>안전은 어떻게 관리되나요?</summary>
+      <p>수상안전요원 자격 강사가 지도합니다.</p>
+      <p>구명조끼 착용, 안전교육, 소규모 그룹 운영으로 안전을 보장합니다.</p>
+    </details>
+    <details open>
+      <summary>몇 살부터 참여 가능한가요?</summary>
+      <p>초등학교 1학년 이상 참여 가능합니다.</p>
+      <p>저학년은 부모 동반, 고학년은 독립 참여 가능합니다.</p>
+    </details>
+    <details open>
+      <summary>준비물은 어떻게 되나요?</summary>
+      <p>편한 복장, 여분 옷, 수건을 준비해주세요.</p>
+      <p>여름은 물놀이 복장, 그 외 계절은 장화 추천.</p>
+    </details>
+    <details open>
+      <summary>환불이나 변경은 어떻게 되나요?</summary>
+      <p>3일 전까지 100% 환불, 이후 일부 환불 또는 1회 변경 가능.</p>
+      <p>우천, 폭염 시 사전 공지 후 협의합니다.</p>
+    </details>
+    <details open>
+      <summary>폭염이나 태풍 시 체험 진행되나요?</summary>
+      <p>우천/폭염 시 사전 공지 후 체험을 취소할 수 있습니다.</p>
+    </details>
+  </div>
+
+  <!-- Team Section -->
+  <div class="section">
+    <h2>운영진</h2>
+    <p>5년 경력 강사, LIFEGUARD 자격</p>
+    <div class="team-container">
+      <img src="https://i.imgur.com/b4OBUkB.jpeg" alt="운영진 1" class="team-img">
+      <img src="https://i.imgur.com/4lfHYJv.png" alt="운영진 2" class="team-img">
+      <img src="https://i.imgur.com/mUH3CBw.jpeg" alt="운영진 3" class="team-img">
+    </div>
+  </div>
+
+  <!-- Footer CTA -->
+  <div class="section footer-cta">
+    <button class="cta-button" onclick="openModal('8/16(토) PM 3~5시')">8/16(토) PM 3~5시 신청하기</button>
+    <button class="cta-button" onclick="openModal('8/17(일) PM 3~5시')">8/17(일) PM 3~5시 신청하기</button>
+  </div>
+
+  <!-- Floating CTA -->
+  <div class="floating-cta">
+    <button class="cta-button" onclick="openModal('8/16(토) PM 3~5시')">8/16(토) PM 3~5시 신청하기</button>
+    <button class="cta-button" onclick="openModal('8/17(일) PM 3~5시')">8/17(일) PM 3~5시 신청하기</button>
+  </div>
+
+  <!-- Modal Form -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">×</span>
+      <h2>체험 신청</h2>
+      <form id="signupForm">
+        <input type="hidden" id="date">
+        <label>이름 <span title="문자 안내용">ℹ️</span></label>
+        <input type="text" id="name" required>
+        <label>연락처 <span title="문자 안내용">ℹ️</span></label>
+        <input type="tel" id="phone" required>
+        <label>자녀 나이 <span title="8~9세는 부모 1명 동반 필수(최소 2인, 8만원)">ℹ️</span></label>
+        <select id="childAge" required>
+          <option value="" disabled selected>선택</option>
+          <option value="8-9">8~9세 (부모 동반 필수)</option>
+          <option value="10-13">10~13세</option>
+        </select>
+        <label>참여 인원</label>
+        <p class="note" id="formNote"></p>
+        <select id="participants" required>
+          <option value="" disabled selected>선택</option>
+          <option value="1">1인 (4만원)</option>
+          <option value="2">2인 (8만원)</option>
+          <option value="3">3인 (12만원)</option>
+        </select>
+        <label>
+          <input type="checkbox" id="privacyAgree" required>
+          개인정보 동의 <span title="목적: 회원관리, 상담, 안내; 항목: 이름, 전화번호; 기간: 6개월">ℹ️</span>
+        </label>
+        <button type="submit" class="cta-button">신청 완료</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Success Modal -->
+  <div id="successModal" class="success-modal">
+    <div class="success-modal-content">
+      <span class="close" onclick="closeSuccessModal()">×</span>
+      <h2>신청 완료</h2>
+      <ul>
+        <li>24시간 내 문자 안내</li>
+        <li>8~9세: 부모 동반 확인</li>
+        <li>준비물: 편한 복장, 여분 옷</li>
+        <li><span class="optional">장화(선택)</span>: 편안한 체험</li>
+        <li>문의: 📞 010-9865-7936 (9AM~6PM)</li>
+      </ul>
+      <button onclick="closeSuccessModal()" class="cta-button">확인</button>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>
+    console.log('Script loaded');
+    emailjs.init("pdoL1uaTJvcQun7eE");
+    console.log('EmailJS initialized');
+
+    function startCountdown() {
+      const deadline = new Date('2025-08-02T15:00:00').getTime();
+      const countdown = document.getElementById('countdown');
+      if (!countdown) return;
+      setInterval(() => {
+        const now = new Date().getTime();
+        const distance = deadline - now;
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        countdown.textContent = `모집 마감까지 ${days}일 ${hours}시간 남음`;
+        if (distance < 0) countdown.textContent = '모집 마감';
+      }, 1000);
+    }
+
+    function openModal(date) {
+      console.log('openModal', date);
+      const modal = document.getElementById('modal');
+      const dateInput = document.getElementById('date');
+      if (modal && dateInput) {
+        modal.style.display = 'block';
+        dateInput.value = date;
+      } else {
+        console.error('Modal or date input not found');
+      }
+    }
+
+    function closeModal() {
+      console.log('closeModal');
+      const modal = document.getElementById('modal');
+      if (modal) modal.style.display = 'none';
+      else console.error('Modal not found');
+    }
+
+    function openSuccessModal() {
+      console.log('openSuccessModal');
+      const successModal = document.getElementById('successModal');
+      if (successModal) successModal.style.display = 'block';
+      else console.error('Success modal not found');
+    }
+
+    function closeSuccessModal() {
+      console.log('closeSuccessModal');
+      const successModal = document.getElementById('successModal');
+      if (successModal) {
+        successModal.style.display = 'none';
+        closeModal();
+        document.getElementById('signupForm').reset();
+        resetParticipantOptions();
+      } else {
+        console.error('Success modal not found');
+      }
+    }
+
+    function resetParticipantOptions() {
+      const participantSelect = document.getElementById('participants');
+      const formNote = document.getElementById('formNote');
+      participantSelect.innerHTML = `
+        <option value="" disabled selected>선택</option>
+        <option value="1">1인 (4만원)</option>
+        <option value="2">2인 (8만원)</option>
+        <option value="3">3인 (12만원)</option>
+      `;
+      formNote.textContent = '';
+    }
+
+    const childAgeSelect = document.getElementById('childAge');
+    const participantSelect = document.getElementById('participants');
+    const formNote = document.getElementById('formNote');
+    if (childAgeSelect && participantSelect && formNote) {
+      childAgeSelect.addEventListener('change', function() {
+        const age = this.value;
+        participantSelect.innerHTML = '';
+        if (age === '8-9') {
+          formNote.textContent = '8~9세는 부모 1명 동반 필수(최소 2인, 8만원).';
+          participantSelect.innerHTML = `
+            <option value="" disabled selected>선택</option>
+            <option value="2">2인 (8만원)</option>
+            <option value="3">3인 (12만원)</option>
+          `;
+        } else {
+          formNote.textContent = '';
+          participantSelect.innerHTML = `
+            <option value="" disabled selected>선택</option>
+            <option value="1">1인 (4만원)</option>
+            <option value="2">2인 (8만원)</option>
+            <option value="3">3인 (12만원)</option>
+          `;
+        }
+      });
+    }
+
+    const form = document.getElementById('signupForm');
+    if (form) {
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        console.log('Form submitted');
+        const name = document.getElementById('name').value;
+        const phone = document.getElementById('phone').value;
+        const childAge = document.getElementById('childAge').value;
+        const participants = document.getElementById('participants').value;
+        const date = document.getElementById('date').value;
+        const privacyAgree = document.getElementById('privacyAgree').checked;
+
+        if (childAge === '8-9' && participants === '1') {
+          formNote.textContent = '8~9세는 부모 1명 동반 필수입니다. 최소 2인(8만원)을 선택해주세요.';
+          return;
+        }
+
+        if (!privacyAgree) {
+          formNote.textContent = '개인정보 동의는 필수입니다.';
+          return;
+        }
+
+        console.log('Form data:', { name, phone, childAge, participants, date, privacyAgree });
+
+        emailjs.send('service_abc123', 'template_xyz789', {
+          name: name,
+          phone: phone,
+          child_age: childAge,
+          participants: participants,
+          date: date,
+          privacy_agree: privacyAgree
+        }).then(() => {
+          console.log('Email sent');
+          openSuccessModal();
+        }).catch((error) => {
+          console.error('Email failed:', error);
+          formNote.textContent = '신청 실패, 다시 시도해주세요.';
+        });
+      });
+    } else {
+      console.error('signupForm not found');
+    }
+
+    const fadeIns = document.querySelectorAll('.fade-in');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.2 });
+    fadeIns.forEach(item => observer.observe(item));
+
+    document.addEventListener('DOMContentLoaded', () => {
+      startCountdown();
+    });
+  </script>
+</body>
+</html>
