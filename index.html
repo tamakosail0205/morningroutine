@@ -366,6 +366,37 @@
       opacity: 1;
       transform: translateY(0);
     }
+    .preview-content {
+      background: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+      padding: 20px;
+      max-width: 600px;
+      margin: 20px auto;
+      text-align: left;
+      font-size: 1.05em;
+      color: #555;
+    }
+    .preview-content p {
+      font-style: italic;
+      margin: 0 0 15px;
+    }
+    .preview-button {
+      display: inline-block;
+      background: rgba(211, 47, 47, 0.9);
+      color: white;
+      padding: 10px 20px;
+      font-size: 1em;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+    .preview-button:hover {
+      background: rgba(183, 28, 28, 0.9);
+    }
     @media (max-width: 768px) {
       body {
         font-size: 16px;
@@ -401,8 +432,12 @@
       .program-item h3 {
         font-size: 1.5em;
       }
-      .program-item p, .recommended ul, .overview table, .faq p {
+      .program-item p, .recommended ul, .overview table, .faq p, .preview-content {
         font-size: 0.95em;
+      }
+      .preview-button {
+        font-size: 0.95em;
+        padding: 8px 16px;
       }
       .review-card {
         font-size: 0.95em;
@@ -446,8 +481,12 @@
       .program-item h3 {
         font-size: 1.4em;
       }
-      .program-item p, .recommended ul, .overview table, .faq p {
+      .program-item p, .recommended ul, .overview table, .faq p, .preview-content {
         font-size: 0.9em;
+      }
+      .preview-button {
+        font-size: 0.9em;
+        padding: 8px 14px;
       }
       .review-card {
         font-size: 0.9em;
@@ -486,6 +525,10 @@
       <li>신청 후, 정식 시작 전까지<br>미리보기 콘텐츠 1~2편 제공</li>
       <li>🎁 매월 1일,<br>당신만의 감정·철학 루틴이 시작됩니다.</li>
     </ul>
+    <div class="preview-content fade-in">
+      <p>“한 글자에 담긴 삶의 언어로, 우리는 마음을 정리합니다.<br>‘止(그칠 지)’는 멈춤의 순간에서 깨달음을 찾는 여정입니다.<br>매주 월요일 아침, 한자와 에세이가 당신의 내면을 비춥니다.”</p>
+      <a href="https://open.substack.com/pub/tamakosail0205/p/bed?r=2o2mqo&utm_campaign=post&utm_medium=web" target="_blank" class="preview-button">지금 미리보기</a>
+    </div>
     <p class="slogan">“한 자(字)가 건네는 위로,<br>당신의 마음에 말을 건네는 아침.”</p>
   </div>
 
@@ -547,7 +590,7 @@
         <p>한 글자를 넘기며<br>삶의 기억이 떠올랐습니다.<br>논둑길, 고랑길, 어머니의 손.</p>
       </div>
       <div class="review-card">
-        <p>농부의 딸인 저는<br>논밭과 탯줄이 이어져 있어요.<br>그 글자 하나에,<br>모든 풍경이 스머납니다.</p>
+        <p>농부의 딸인 저는<br>논밭과 탯줄이 이어져 있어요.<br>그 글자 하나에,<br>모든 풍경이 스며납니다.</p>
       </div>
       <div class="review-card">
         <p>타마 글은 공간이 크고 넓어요.<br>그런데도 집중하는 힘이 있어요.</p>
