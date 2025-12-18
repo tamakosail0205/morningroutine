@@ -662,15 +662,102 @@
     <button class="cta-button" onclick="openModal()">1월 구독 신청</button>
   </div>
 
-  <!-- Modal & Success Modal & Script 동일 -->
-  <div id="modal" class="modal">...</div>
-  <div id="successModal" class="success-modal">...</div>
-
+<!-- Modal Form -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">×</span>
+      <h2>1월 구독 신청</h2>
+      <form id="signupForm">
+        <label>이름 <span title="문자 안내용">ℹ️</span></label>
+        <input type="text" id="name" required>
+        <label>이메일 <span title="이메일 전달용">ℹ️</span></label>
+        <input type="email" id="email" required>
+        <label>연락처 <span title="문자 및 카카오톡(단톡방) 안내용">ℹ️</span></label>
+        <input type="tel" id="phone" required>
+        <label>전달 방식</label>
+        <select id="delivery" required>
+          <option value="" disabled selected>선택</option>
+          <option value="email">이메일</option>
+          <option value="kakao">카카오톡(단톡방)</option>
+        </select>
+        <p class="note">카카오톡(단톡방) 선택 시,<br>‘카카오톡 &gt; 설정 &gt; 친구 &gt;<br>전화번호로 친구 추가 허용’을 켜주세요.</p>
+        <label>
+          <input type="checkbox" id="privacyAgree" required>
+          개인정보 동의 <span title="목적: 회원관리, 상담, 안내; 항목: 이름, 이메일, 전화번호; 기간: 6개월">ℹ️</span>
+                  </label>
+        <p class="note" id="formNote"></p>
+        <button type="submit" class="cta-button">1월 구독 신청</button>
+      </form>
+    </div>
+  </div>
+  <!-- Success Modal -->
+  <div id="successModal" class="success-modal">
+    <div class="success-modal-content">
+      <span class="close" onclick="closeSuccessModal()">×</span>
+      <h2>신청 완료</h2>
+      <ul>
+        <li>24시간 내 문자 안내</li>
+        <li>구독료: 10,000원<br>(1월, 4주)</li>
+        <li>미리보기 콘텐츠:<br>신청 후 1~2편 제공</li>
+        <li>첫 에세이:<br>2026년 1월 5일</li>
+        <li>문의: 📞 010-9865-7936<br>(9AM~6PM)</li>
+      </ul>
+      <button onclick="closeSuccessModal()" class="cta-button">확인</button>
+    </div>
+  </div>
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <script>
-    // 기존 스크립트 그대로 (emailjs, modal, fade-in observer)
     emailjs.init("pdoL1uaTJvcQun7eE");
-    // ... (기존 스크립트 복사)
+    function openModal() {
+      const modal = document.getElementById('modal');
+      if (modal) modal.style.display = 'block';
+    }
+    function closeModal() {
+      const modal = document.getElementById('modal');
+      if (modal) modal.style.display = 'none';
+    }
+    function openSuccessModal() {
+      const successModal = document.getElementById('successModal');
+      if (successModal) successModal.style.display = 'block';
+    }
+    function closeSuccessModal() {
+      const successModal = document.getElementById('successModal');
+      if (successModal) successModal.style.display = 'none';
+      closeModal();
+      document.getElementById('signupForm').reset();
+    }
+    const form = document.getElementById('signupForm');
+    if (form) {
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const phone = document.getElementById('phone').value;
+        const delivery = document.getElementById('delivery').value;
+        const privacyAgree = document.getElementById('privacyAgree').checked;
+        const formNote = document.getElementById('formNote');
+        if (!email.match(/^[^@]+@[^@]+\.[^@]+$/)) {
+          formNote.textContent = '유효한 이메일 주소를 입력해주세요.';
+          return;
+        }
+        if (!privacyAgree) {
+          formNote.textContent = '개인정보 동의는 필수입니다.';
+          return;
+        }
+        emailjs.send('service_abc123', 'template_tphdetl', {
+          name: name,
+          email: email,
+          phone: phone,
+          delivery: delivery,
+          privacy_agree: privacyAgree,
+          time: new Date().toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' })
+        }).then(() => {
+          openSuccessModal();
+        }).catch((error) => {
+          formNote.textContent = '신청 실패, 다시 시도해주세요.';
+        });
+      });
+    }
     const fadeIns = document.querySelectorAll('.fade-in');
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -678,12 +765,25 @@
       });
     }, { threshold: 0.2 });
     fadeIns.forEach(item => observer.observe(item));
-    // modal 함수들 그대로
-    function openModal() { document.getElementById('modal').style.display = 'block'; }
-    function closeModal() { document.getElementById('modal').style.display = 'none'; }
-    function openSuccessModal() { document.getElementById('successModal').style.display = 'block'; }
-    function closeSuccessModal() { document.getElementById('successModal').style.display = 'none'; closeModal(); document.getElementById('signupForm').reset(); }
-    // form submit 등 기존 그대로 유지
+    // Review Slider
+    let currentReview = 0;
+    const reviews = document.querySelectorAll('.review-card');
+    const slider = document.getElementById('reviewSlider');
+    function showReview(index) {
+      if (index >= reviews.length) currentReview = 0;
+      if (index < 0) currentReview = reviews.length - 1;
+      slider.style.transform = `translateX(-${currentReview * 100}%)`;
+    }
+    function nextReview() {
+      currentReview++;
+      showReview(currentReview);
+    }
+    function prevReview() {
+      currentReview--;
+      showReview(currentReview);
+    }
+    setInterval(nextReview, 5000);
   </script>
+
 </body>
 </html>
