@@ -9,6 +9,9 @@
   <meta name="robots" content="index, follow">
   <meta name="author" content="TAMA">
 
+  <!-- 봇 차단용 숨김 필드 (절대 표시되지 않음) -->
+<input type="text" name="honeypot" style="display:none;">
+  
   <!-- Open Graph (페이스북, 카카오톡 링크 미리보기용) -->
   <meta property="og:title" content="한자의 아침 - 월요일 아침 7시 마음 정리 루틴">
   <meta property="og:description" content="한 글자, 한 문장으로 삶의 언어를 되찾는 30일 자기성찰 여정. 3월 구독 신청 오픈!">
@@ -544,6 +547,9 @@
         지금 미리보기 (네이버 블로그)
       </a>
     </div>
+    <p style="font-size: 0.9em; color: #777; margin-top: 30px;">
+  개인정보는 구독 목적으로만 사용되며, 6개월 무활동 시 자동 삭제됩니다. 제3자 제공 없음.
+</p>
   </div>
 
   <!-- 후기 섹션 -->
@@ -653,6 +659,18 @@
           <input type="checkbox" id="privacyAgree" required>
           개인정보 동의 <span title="목적: 회원관리, 상담, 안내; 항목: 이름, 이메일, 전화번호; 기간: 6개월">ℹ️</span>
         </label>
+        <p class="note" style="font-size: 0.95em; color: #555; margin-top: 8px; line-height: 1.5;">
+  수집된 개인정보(이름, 이메일, 연락처)는 <strong>구독 서비스 제공 목적으로만 사용</strong>되며,<br>
+  구독 해지 또는 <strong>6개월간 활동이 없을 경우 자동 삭제</strong>됩니다.<br>
+  정보는 절대 제3자에게 제공·판매되지 않습니다.
+</p>
+        <div style="background:#f8f8f8; padding:12px; border-radius:6px; margin:12px 0; font-size:0.95em; color:#555; text-align:left;">
+  <strong>개인정보 보호 정책</strong><br>
+  • 수집 항목: 이름, 이메일, 연락처<br>
+  • 이용 목적: 구독 안내 및 콘텐츠 발송<br>
+  • 보유 기간: 구독 종료 또는 6개월 무활동 시 즉시 파기<br>
+  • 제3자 제공: 없음 (판매·공유 안 함)
+</div>
         <p class="note" id="formNote"></p>
         <button type="submit" class="cta-button">3월 구독 신청</button>
       </form>
