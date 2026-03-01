@@ -385,6 +385,65 @@
       .review-bubble { font-size: 15px; padding: 18px 20px; }
       .review-bubble::before, .review-bubble::after { font-size: 50px; }
     }
+    .accordion {
+    margin: 32px auto;
+  }
+  .accordion-item {
+    margin-bottom: 12px;
+    border: 1px solid #e9e2df;
+    border-radius: 12px;
+    overflow: hidden;
+    background: white;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  .accordion-item summary {
+    padding: 16px 20px;
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #333;
+    cursor: pointer;
+    background: #fafafa;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.2s;
+  }
+  .accordion-item summary:hover {
+    background: #f5f5f5;
+  }
+  .accordion-item summary .arrow {
+    font-size: 1.2em;
+    transition: transform 0.3s;
+  }
+  .accordion-item[open] summary .arrow {
+    transform: rotate(180deg);
+  }
+  .accordion-content {
+    padding: 0 20px 20px;
+    background: white;
+  }
+  .related-item {
+    margin: 20px 0;
+    padding: 16px;
+    border-left: 4px solid #d81b60;
+    background: rgba(216,27,96,0.03);
+    border-radius: 8px;
+  }
+  .related-item strong {
+    display: block;
+    font-size: 1.15em;
+    margin-bottom: 8px;
+    color: #d81b60;
+  }
+  .related-item p {
+    margin: 0 0 8px;
+    color: #555;
+  }
+  .related-item .example {
+    font-size: 0.95em;
+    color: #777;
+    font-style: italic;
+  }
   </style>
 </head>
 <body>
@@ -431,27 +490,70 @@
       <div class="example-card">
         <label>실제로 도착하는 한자 카드의 모습 (예시)</label>
         <div class="card">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/%E5%BF%A0-bronze-warring.svg/960px-%E5%BF%A0-bronze-warring.svg.png" alt="한자 카드 忠">
-          <div class="text">
-            <p>忠 (충성할 충)</p>
-            <p>忠은 <strong>中(가운데)</strong>와 <strong>心(마음)</strong>이 합쳐진 글자입니다.</p>
-            <p>中은 본래 들판 한가운데 세워진 깃대이자 북이었습니다.<br>
-               사람들을 모으고, 바람의 방향을 읽고,<br>모두가 소리를 들을 수 있는 기준의 자리였습니다.</p>
-            <p>忠은 그 중심이<br>바깥의 규범이 아니라<br>자기 마음 안에 놓여 있을 때의 상태를 말합니다.</p>
-            <p>마음이 흔들리는 순간,<br>
-               忠은 흔들림을 없애라는 말이 아니라<br>흔들리면서도 중심을 잃지 않으려는 태도에 가깝습니다.</p>
-            <p>성과보다 과정에서,<br>정답보다 질문 속에서,<br>자기 마음을 속이지 않는 정직함.<br>그것이 忠입니다.</p>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/%E5%BE%B7-oracle.svg/960px-%E5%BE%B7-oracle.svg.png" alt="한자 카드 德">
+      <div class="text">
+        <p>德 (덕)</p>
+        <p>德은 길 위에서 드러나는 빛입니다.</p>
+        <p>彳(행할 행)는 걷는 발걸음이고, 直(곧을 직)은 앞을 바라보는 눈을 품은 글자입니다.</p>
+        <p>눈(目)은 단순한 시선이 아니라, 어둠 속에서도 방향을 가늠하는 빛의 감각입니다.</p>
+        <p>德은 그 빛을 품고 계속 걸어가는 힘입니다.</p>
+        <p>한국 철학에서 덕은 윤리 규범이 아니었습니다.</p>
+        <p>착하게 살아야 할 규율이 아니라,<br>자기 안에 솟아나는 빛을 세상 속에서 실현하는 과정이었습니다.</p>
+        <p>그리고 빛은 완성된 성품이 아니라,<br>매 순간 길 위에서 다시 켜지는 태도에 가깝습니다.</p>
+        <p>걸으며 흔들릴 수는 있습니다.<br>그러나 눈을 거두지 않고,<br>자기 마음을 곧게 세운 채 발을 내딛을 때<br>그 사람의 덕은 말없이 드러납니다.</p>
+        <p>德은 빛나 보이기 위한 것이 아닙니다.<br>자기 빛을 버리지 않고<br>자기 길을 계속 걷는 데서 생겨납니다.</p>
           </div>
         </div>
         <p style="font-size: 13px; color: #aaa; margin-top: 16px;">매주 다른 한자가 여러분의 카톡으로 찾아옵니다.</p>
       </div>
     </div>
 
-    <!-- 2. 생각을 넓히다 (생략 또는 유지) -->
-    <div class="program-item fade-in">
-      <h3>생각을 넓히다</h3>
-      <p>한 글자 + 파생 한자 5개로 삶을 바라보는 시선을 확장합니다.</p>
-    </div>
+   <!-- 2. 생각을 넓히다 섹션 전체 교체 -->
+<div class="program-item fade-in">
+  <h3>생각을 넓히다</h3>
+  <p>한 글자 + 파생 한자 5개로 삶을 바라보는 시선을 확장합니다.</p>
+
+  <!-- 아코디언 컨테이너 -->
+  <div class="accordion" style="max-width:720px; margin:32px auto; text-align:left;">
+    <details class="accordion-item">
+      <summary>
+        파생 한자 5개 자세히 보기
+        <span class="arrow">▼</span>
+      </summary>
+      <div class="accordion-content">
+        <div class="related-item">
+          <strong>直 (곧을 직) — 중심 한자</strong>
+          <p>直은 도덕적 엄격함이 아니라, 앞을 보며 방향을 잃지 않는 시선을 뜻합니다.<br>德이 계속 걸어가는 힘이라면, 直은 그 길에서 눈을 거두지 않는 상태입니다.</p>
+          <p class="example">예) 正直(정직), 率直(솔직)</p>
+        </div>
+
+        <div class="related-item">
+          <strong>1. 得 (얻을 득)</strong>
+          <p>得은 붙잡아 소유하는 결과가 아니라, 걸어온 길에서 자연스럽게 주어지는 몫을 가리킵니다.<br>德이 태도라면, 得은 그 태도가 시간 속에서 남은 흔적입니다.</p>
+          <p class="example">예) 得失(득실), 習得(습득)</p>
+        </div>
+
+        <div class="related-item">
+          <strong>2. 術 (재주 술)</strong>
+          <p>術은 잔기술이 아니라, 길 위에서 몸으로 익힌 방법입니다.<br>德이 빛이라면, 術은 그 빛을 현실에서 구현하는 감각입니다.</p>
+          <p class="example">예) 技術(기술), 戰術(전술)</p>
+        </div>
+
+        <div class="related-item">
+          <strong>3. 微 (작을 미)</strong>
+          <p>微는 보잘것없음이 아니라, 방향을 바꾸는 미세한 기미, 빛의 가장 작은 움직임을 가리킵니다.</p>
+          <p class="example">예) 微細(미세), 微妙(미묘)</p>
+        </div>
+
+        <div class="related-item">
+          <strong>4. 徵 (부를 징)</strong>
+          <p>徵은 강제된 명령이 아니라, 미세한 징후를 읽고 응답하는 소환입니다.<br>德이 안에서 빛날 때, 徵은 그 빛이 바깥으로 드러나는 신호입니다.</p>
+          <p class="example">예) 象徵(상징), 徵候(징후)</p>
+        </div>
+      </div>
+    </details>
+  </div>
+</div>
 
     <!-- 3. 읽고, 생각하고, 나누는 성찰 -->
     <div class="program-item fade-in">
