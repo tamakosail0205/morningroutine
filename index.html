@@ -3,1109 +3,953 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>한자의 아침 — 8월 구독 · 急</title>
+<meta name="description" content="월요일 아침, 한 글자와 단둘이 앉는 시간. 한자의 아침 2026년 8월 구독.">
+<meta property="og:title" content="한자의 아침 — 월요일 아침, 한 글자와 단둘이 앉는 시간">
+<meta property="og:description" content="急 — 지금 당신을 급하게 만드는 것은 무엇인가요? 월 10,000원 · 8월 구독.">
+<title>한자의 아침 — 2026년 8월</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Black+Han+Sans&family=Gaegu:wght@400;700&family=Noto+Sans+KR:wght@300;400;700;900&family=Noto+Serif+KR:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Noto+Serif+KR:wght@300;400;600&family=Noto+Sans+KR:wght@300;400;500&display=swap');
 
 /* ── 토큰 ── */
 :root {
-  --white:   #FEFCF7;
-  --offwhite:#F7F3EA;
-  --ink:     #1A1008;
-  --red:     #D42B1E;
-  --yellow:  #F5D130;
-  --blue:    #2255AA;
-  --green:   #2A6640;
-  --pink:    #F0A0B0;
-  --tape:    rgba(245,209,48,0.55);
-  --shadow-sticker: 3px 4px 0px rgba(0,0,0,0.18);
-  --shadow-photo:   6px 8px 0px rgba(0,0,0,0.22);
+  --paper:      #F8F5EF;
+  --paper-dark: #EDE8DE;
+  --ink:        #1E1A14;
+  --ink-mid:    #4A4138;
+  --ink-light:  #8A7E70;
+  --red:        #A8201A;
+  --gold:       #8C6D3F;
+  --gold-light: #B89560;
+  --line:       rgba(30,26,20,0.08);
+  --line-mid:   rgba(30,26,20,0.14);
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 
 body {
-  background: var(--white);
-  color: var(--ink);
   font-family: 'Noto Serif KR', serif;
+  background: var(--paper);
+  color: var(--ink);
+  line-height: 1.8;
   overflow-x: hidden;
-  /* 도화지 질감 */
-  background-image:
-    radial-gradient(circle at 20% 30%, rgba(245,209,48,0.04) 0%, transparent 50%),
-    radial-gradient(circle at 80% 70%, rgba(212,43,30,0.03) 0%, transparent 50%);
 }
 
-/* 스크롤 리빌 */
-.reveal { opacity:0; transform:translateY(24px); transition:opacity 0.7s ease, transform 0.7s ease; }
-.reveal.on { opacity:1; transform:translateY(0); }
-.reveal-r { opacity:0; transform:translateX(20px) rotate(1deg); transition:opacity 0.7s ease, transform 0.7s ease; }
-.reveal-r.on { opacity:1; transform:translateX(0) rotate(0deg); }
-
-/* ══════════════════════════════
-   TAPE 데코 유틸
-══════════════════════════════ */
-.tape {
-  position: absolute;
-  background: var(--tape);
-  height: 22px;
-  border-radius: 2px;
-  transform-origin: center;
-  z-index: 10;
-  pointer-events: none;
+/* ── 리빌 ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1s ease, transform 1s ease;
 }
-.tape-h { width: 80px; }
-.tape-h2 { width: 60px; }
-.tape-d { transform: rotate(-12deg); width: 70px; }
-.tape-d2 { transform: rotate(8deg); width: 55px; }
+.reveal.on { opacity: 1; transform: translateY(0); }
+.reveal-slow { transition-duration: 1.4s; }
+.d1 { transition-delay: 0.1s; }
+.d2 { transition-delay: 0.22s; }
+.d3 { transition-delay: 0.34s; }
+.d4 { transition-delay: 0.46s; }
+
+/* ── 공통 ── */
+.eyebrow {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.38em;
+  color: var(--ink-light);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 14px;
+}
+.section-title {
+  font-family: 'Nanum Myeongjo', serif;
+  font-size: clamp(1.35rem, 3.2vw, 1.9rem);
+  font-weight: 700;
+  line-height: 1.55;
+  color: var(--ink);
+}
+.thin-rule {
+  width: 40px;
+  height: 1px;
+  background: var(--gold);
+  margin: 20px 0;
+  opacity: 0.5;
+}
+.body-text {
+  font-size: clamp(0.88rem, 1.9vw, 0.98rem);
+  line-height: 2.1;
+  color: var(--ink-mid);
+}
+.body-text p { margin-bottom: 1.2em; }
 
 /* ══════════════════════════════
-   1. HERO — 콜라주 히어로
+   1. HERO
 ══════════════════════════════ */
 .hero {
   min-height: 100svh;
-  background: var(--white);
-  position: relative;
+  background: var(--ink);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 60px 24px 80px;
+  padding: 64px 32px;
+  position: relative;
   overflow: hidden;
 }
 
-/* 배경 한자 워터마크 */
-.hero-watermark {
+/* 배경 한자 — 아주 연하게 */
+.hero-bg {
   position: absolute;
-  font-family: 'Black Han Sans', sans-serif;
-  font-size: clamp(40vw, 50vw, 56vw);
-  color: rgba(26,16,8,0.04);
+  font-family: 'Nanum Myeongjo', serif;
+  font-size: clamp(52vw, 60vw, 68vw);
+  color: rgba(255,255,255,0.028);
   top: 50%; left: 50%;
-  transform: translate(-50%, -50%) rotate(-8deg);
+  transform: translate(-44%, -48%);
   pointer-events: none;
   line-height: 1;
   user-select: none;
-}
-
-/* 스티커들 */
-.sticker-date {
-  position: absolute;
-  top: clamp(20px,4vw,36px);
-  left: clamp(16px,4vw,36px);
-  background: var(--yellow);
-  font-family: 'Gaegu', cursive;
-  font-size: clamp(0.75rem, 2vw, 0.95rem);
-  color: var(--ink);
-  padding: 6px 14px;
-  border-radius: 4px;
-  box-shadow: var(--shadow-sticker);
-  transform: rotate(-3deg);
-  letter-spacing: 0.05em;
-}
-.sticker-price {
-  position: absolute;
-  top: clamp(20px,4vw,36px);
-  right: clamp(16px,4vw,36px);
-  background: var(--red);
-  color: #fff;
-  font-family: 'Black Han Sans', sans-serif;
-  font-size: clamp(0.85rem, 2.2vw, 1.1rem);
-  padding: 8px 18px;
-  border-radius: 2px;
-  box-shadow: var(--shadow-sticker);
-  transform: rotate(2deg);
-  letter-spacing: 0.08em;
 }
 
 .hero-inner {
   position: relative;
   z-index: 2;
   text-align: center;
-  max-width: 720px;
+  max-width: 580px;
   width: 100%;
-}
-
-/* 브랜드명 */
-.hero-brand {
-  font-family: 'Gaegu', cursive;
-  font-size: clamp(1rem, 2.5vw, 1.3rem);
-  color: var(--blue);
-  letter-spacing: 0.15em;
-  margin-bottom: 20px;
-  display: block;
-  text-decoration: underline;
-  text-decoration-style: wavy;
-  text-underline-offset: 4px;
-}
-
-/* 메인 한자 — 스티커처럼 */
-.hero-hanzi-sticker {
-  display: inline-block;
-  position: relative;
-  margin: 0 auto 24px;
-}
-.hero-hanzi-sticker .tape { top: -10px; left: -20px; }
-.hero-hanzi-sticker .tape2 { top: -10px; right: -20px; transform: rotate(10deg); width: 60px; background: rgba(240,160,176,0.6); height: 22px; border-radius: 2px; position: absolute; }
-
-.hero-hanzi-char {
-  font-family: 'Black Han Sans', sans-serif;
-  font-size: clamp(8rem, 28vw, 18rem);
-  color: var(--ink);
-  line-height: 0.85;
-  display: block;
-  /* 종이에 찍힌 도장 느낌 */
-  text-shadow:
-    4px 4px 0px rgba(212,43,30,0.15),
-    -1px -1px 0px rgba(0,0,0,0.08);
-  position: relative;
-}
-/* 빨간 도장 오버레이 */
-.hero-hanzi-char::after {
-  content: '急';
-  position: absolute;
-  inset: 0;
-  font-family: 'Black Han Sans', sans-serif;
-  font-size: inherit;
-  color: var(--red);
-  opacity: 0.08;
-  transform: translate(6px, 5px) rotate(2deg);
-  pointer-events: none;
-}
-
-.hero-reading {
-  font-family: 'Gaegu', cursive;
-  font-size: clamp(1rem, 2.5vw, 1.35rem);
-  color: var(--blue);
-  letter-spacing: 0.2em;
-  margin-top: 8px;
-  display: block;
-}
-
-/* 공감 문장 — 포스트잇처럼 */
-.hero-postit {
-  background: var(--yellow);
-  padding: 20px 28px;
-  margin: 28px auto;
-  max-width: 440px;
-  transform: rotate(-1.5deg);
-  box-shadow: var(--shadow-photo);
-  position: relative;
-}
-.hero-postit::before {
-  content: '';
-  position: absolute;
-  top: -12px; left: 50%;
-  transform: translateX(-50%);
-  width: 60px; height: 22px;
-  background: rgba(245,209,48,0.7);
-  border-radius: 2px;
-}
-.hero-postit p {
-  font-family: 'Gaegu', cursive;
-  font-size: clamp(1.05rem, 2.8vw, 1.35rem);
-  color: var(--ink);
-  line-height: 1.8;
-  text-align: center;
-}
-.hero-postit p strong { font-weight: 700; }
-
-/* 질문 손글씨 */
-.hero-question {
-  font-family: 'Gaegu', cursive;
-  font-size: clamp(0.95rem, 2.4vw, 1.2rem);
-  color: var(--ink);
-  opacity: 0.6;
-  margin-top: 12px;
-  font-style: italic;
-  letter-spacing: 0.05em;
-}
-
-/* CTA 버튼 — 스탬프 느낌 */
-.hero-cta {
-  margin-top: 40px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 14px;
+  gap: 0;
 }
-.btn-stamp {
-  background: var(--red);
-  color: #fff;
-  border: none;
-  padding: 16px 44px;
-  font-family: 'Black Han Sans', sans-serif;
-  font-size: clamp(0.95rem, 2.5vw, 1.15rem);
-  letter-spacing: 0.12em;
-  cursor: pointer;
-  border-radius: 3px;
-  box-shadow: 4px 4px 0px rgba(0,0,0,0.25);
-  transition: transform 0.15s, box-shadow 0.15s;
-  transform: rotate(-0.5deg);
-}
-.btn-stamp:hover { transform: rotate(0deg) translateY(-2px); box-shadow: 6px 6px 0px rgba(0,0,0,0.2); }
 
-.btn-ghost-hand {
-  font-family: 'Gaegu', cursive;
-  font-size: 0.95rem;
-  color: var(--blue);
+/* 상단 배지 */
+.hero-badge {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.38em;
+  color: rgba(255,255,255,0.28);
+  text-transform: uppercase;
+  margin-bottom: 52px;
+  animation: fadeIn 1.2s ease 0.2s both;
+}
+
+/* 메인 한자 */
+.hero-char {
+  font-family: 'Nanum Myeongjo', serif;
+  font-size: clamp(7rem, 24vw, 14rem);
+  color: #fff;
+  line-height: 0.85;
+  letter-spacing: -0.02em;
+  animation: fadeIn 1.4s ease 0.5s both;
+}
+
+/* 한자 하단 선 */
+.hero-char-line {
+  width: 1px;
+  height: 52px;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.3), transparent);
+  margin: 28px auto;
+  animation: lineGrow 1s ease 1.2s both;
+}
+@keyframes lineGrow { from { height: 0; opacity: 0; } to { height: 52px; opacity: 1; } }
+
+.hero-reading {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.32em;
+  color: var(--gold-light);
+  animation: fadeIn 1s ease 1.4s both;
+  margin-bottom: 36px;
+}
+
+/* 핵심 문장 */
+.hero-line1 {
+  font-family: 'Nanum Myeongjo', serif;
+  font-size: clamp(1.1rem, 3.2vw, 1.6rem);
+  color: rgba(255,255,255,0.55);
+  font-weight: 400;
+  line-height: 1.7;
+  animation: fadeIn 1s ease 1.6s both;
+}
+.hero-line2 {
+  font-family: 'Nanum Myeongjo', serif;
+  font-size: clamp(1.2rem, 3.5vw, 1.75rem);
+  color: #fff;
+  font-weight: 700;
+  line-height: 1.6;
+  margin-top: 6px;
+  animation: fadeIn 1s ease 1.8s both;
+}
+
+/* 질문 */
+.hero-question {
+  font-family: 'Noto Serif KR', serif;
+  font-size: clamp(0.82rem, 2vw, 0.95rem);
+  color: rgba(255,255,255,0.32);
+  font-weight: 300;
+  letter-spacing: 0.04em;
+  margin-top: 28px;
+  line-height: 1.8;
+  font-style: italic;
+  animation: fadeIn 1s ease 2s both;
+}
+
+/* CTA */
+.hero-cta {
+  margin-top: 52px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  animation: fadeIn 1s ease 2.2s both;
+}
+.btn-main {
+  background: none;
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.3);
+  padding: 14px 40px;
+  font-family: 'Noto Serif KR', serif;
+  font-size: 0.9rem;
+  letter-spacing: 0.14em;
+  cursor: pointer;
+  transition: background 0.3s, border-color 0.3s;
+}
+.btn-main:hover {
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(255,255,255,0.55);
+}
+.btn-price {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 0.68rem;
+  color: rgba(255,255,255,0.22);
+  letter-spacing: 0.18em;
+}
+.btn-scroll {
   background: none;
   border: none;
+  color: rgba(255,255,255,0.25);
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
   cursor: pointer;
-  text-decoration: underline;
-  text-decoration-style: dotted;
-  text-underline-offset: 3px;
-  letter-spacing: 0.08em;
+  margin-top: 4px;
+  transition: color 0.2s;
 }
+.btn-scroll:hover { color: rgba(255,255,255,0.5); }
 
-/* 데코 원 */
-.deco-circle {
-  position: absolute;
-  border-radius: 50%;
-  pointer-events: none;
-}
-.dc-1 { width: 180px; height: 180px; border: 2px dashed rgba(212,43,30,0.12); bottom: 8%; right: 5%; }
-.dc-2 { width: 80px; height: 80px; background: rgba(245,209,48,0.15); top: 15%; left: 8%; }
-.dc-3 { width: 40px; height: 40px; background: rgba(240,160,176,0.25); bottom: 20%; left: 12%; }
-
-.hero-scroll-hint {
-  position: absolute;
-  bottom: 24px; left: 50%;
-  transform: translateX(-50%);
-  font-family: 'Gaegu', cursive;
-  font-size: 0.85rem;
-  color: rgba(26,16,8,0.3);
-  letter-spacing: 0.15em;
-  display: flex; flex-direction: column; align-items: center; gap: 6px;
-}
-.scroll-dots { display: flex; gap: 4px; }
-.scroll-dots span {
-  width: 4px; height: 4px; background: rgba(26,16,8,0.25); border-radius: 50%;
-  animation: dotBounce 1.4s ease-in-out infinite;
-}
-.scroll-dots span:nth-child(2) { animation-delay: 0.2s; }
-.scroll-dots span:nth-child(3) { animation-delay: 0.4s; }
-@keyframes dotBounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-5px)} }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
 /* ══════════════════════════════
-   2. 작가 소개 — 사진 크게
+   2. 작가 — 조용한 소개
 ══════════════════════════════ */
 .author-section {
-  background: var(--offwhite);
-  padding: 80px 24px;
-  position: relative;
-  overflow: hidden;
-}
-.author-section::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 4px;
-  background: repeating-linear-gradient(
-    90deg,
-    var(--red) 0, var(--red) 20px,
-    var(--yellow) 20px, var(--yellow) 40px,
-    var(--blue) 40px, var(--blue) 60px,
-    var(--green) 60px, var(--green) 80px
-  );
+  background: var(--paper);
+  padding: 100px 32px;
+  border-bottom: 1px solid var(--line);
 }
 .author-inner {
   max-width: 840px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 48px;
+  grid-template-columns: 240px 1fr;
+  gap: 64px;
   align-items: start;
 }
-@media (max-width: 660px) {
-  .author-inner { grid-template-columns: 1fr; gap: 32px; }
+@media (max-width: 680px) {
+  .author-inner { grid-template-columns: 1fr; gap: 40px; }
 }
 
-/* 사진 — 폴라로이드 스타일 */
-.author-polaroid {
-  position: relative;
-  display: inline-block;
-}
-.author-polaroid-frame {
-  background: #fff;
-  padding: 12px 12px 48px;
-  box-shadow: var(--shadow-photo);
-  transform: rotate(-2deg);
+/* 사진 — 단순한 프레임 */
+.author-photo-wrap {
   position: relative;
 }
-.author-polaroid-frame img {
+.author-photo {
   width: 100%;
-  height: clamp(260px, 40vw, 400px);
+  aspect-ratio: 3 / 4;
   object-fit: cover;
   object-position: center top;
   display: block;
+  filter: sepia(8%) contrast(1.02);
 }
-.polaroid-caption {
-  font-family: 'Gaegu', cursive;
-  font-size: 1rem;
-  color: var(--ink);
-  text-align: center;
-  margin-top: 10px;
-  letter-spacing: 0.1em;
-  opacity: 0.7;
-}
-
-/* 테이프 장식 */
-.polaroid-tape-tl {
-  position: absolute;
-  top: -10px; left: 20px;
-  width: 60px; height: 22px;
-  background: rgba(245,209,48,0.6);
-  border-radius: 2px;
-  transform: rotate(-8deg);
-}
-.polaroid-tape-tr {
-  position: absolute;
-  top: -10px; right: 20px;
-  width: 60px; height: 22px;
-  background: rgba(240,160,176,0.6);
-  border-radius: 2px;
-  transform: rotate(6deg);
-}
-
-/* 작가 텍스트 */
-.author-text-col {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-}
-.author-name-stamp {
-  display: inline-block;
-  font-family: 'Black Han Sans', sans-serif;
-  font-size: clamp(2rem, 5vw, 3rem);
-  color: var(--ink);
-  line-height: 1;
-  position: relative;
-}
-.author-name-stamp::after {
+/* 사진 하단 얇은 선 */
+.author-photo-wrap::after {
   content: '';
   position: absolute;
-  bottom: -4px; left: 0; right: 0;
-  height: 4px;
-  background: var(--red);
+  bottom: -12px; left: 0; right: 0;
+  height: 1px;
+  background: var(--gold);
+  opacity: 0.3;
 }
-.author-tag-hand {
-  font-family: 'Gaegu', cursive;
-  font-size: clamp(0.88rem, 2vw, 1.05rem);
-  color: var(--blue);
-  line-height: 1.7;
-  letter-spacing: 0.05em;
-}
-.author-bio-text {
-  font-family: 'Noto Serif KR', serif;
-  font-size: clamp(0.85rem, 2vw, 0.95rem);
-  color: var(--ink);
-  line-height: 2;
-  opacity: 0.8;
-}
-.author-bio-text p { margin-bottom: 0.9em; }
-.author-bio-text strong { color: var(--ink); opacity: 1; font-weight: 700; }
 
-/* 스탯 스티커들 */
-.stat-stickers {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-  margin-top: 4px;
-}
-.stat-sticker {
-  background: var(--yellow);
-  padding: 8px 16px;
-  border-radius: 3px;
-  box-shadow: var(--shadow-sticker);
-  text-align: center;
-  transform: rotate(-1.5deg);
-}
-.stat-sticker:nth-child(2) { background: var(--pink); transform: rotate(1deg); }
-.stat-sticker:nth-child(3) { background: #d4f0d4; transform: rotate(-0.5deg); }
-.stat-sticker .s-num {
-  font-family: 'Black Han Sans', sans-serif;
-  font-size: 1.2rem;
+.author-text { display: flex; flex-direction: column; gap: 18px; }
+.author-name {
+  font-family: 'Nanum Myeongjo', serif;
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
+  font-weight: 700;
   color: var(--ink);
-  display: block;
   line-height: 1;
+  margin-bottom: 4px;
 }
-.stat-sticker .s-label {
-  font-family: 'Gaegu', cursive;
+.author-role {
+  font-family: 'Noto Sans KR', sans-serif;
   font-size: 0.72rem;
+  color: var(--gold);
+  letter-spacing: 0.18em;
+  line-height: 1.9;
+}
+.author-stats-row {
+  display: flex;
+  gap: 28px;
+  padding: 18px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  margin: 4px 0;
+}
+.stat { display: flex; flex-direction: column; gap: 2px; }
+.stat-n {
+  font-family: 'Nanum Myeongjo', serif;
+  font-size: 1.1rem;
+  font-weight: 700;
   color: var(--ink);
-  opacity: 0.7;
-  letter-spacing: 0.08em;
-  margin-top: 2px;
-  display: block;
+}
+.stat-l {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 0.6rem;
+  color: var(--ink-light);
+  letter-spacing: 0.1em;
 }
 
 /* ══════════════════════════════
    3. 독자의 말
 ══════════════════════════════ */
-.reviews-section {
-  background: var(--white);
-  padding: 80px 24px;
-  position: relative;
+.review-section {
+  background: var(--paper-dark);
+  padding: 80px 32px;
 }
-.reviews-inner { max-width: 800px; margin: 0 auto; }
-
-.section-label-hand {
-  font-family: 'Gaegu', cursive;
-  font-size: clamp(1.2rem, 3vw, 1.6rem);
-  color: var(--ink);
-  margin-bottom: 8px;
-  display: block;
-  position: relative;
-  display: inline-block;
+.review-inner {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
 }
-.section-label-hand::after {
-  content: '';
-  position: absolute;
-  bottom: -2px; left: 0; right: 0;
-  height: 3px;
-  background: var(--yellow);
-}
-.section-sub-hand {
-  font-family: 'Gaegu', cursive;
-  font-size: 0.9rem;
-  color: rgba(26,16,8,0.45);
-  margin-top: 8px;
-  margin-bottom: 36px;
-  letter-spacing: 0.06em;
-}
-
-.review-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+.review-item {
+  display: flex;
   gap: 20px;
+  align-items: flex-start;
 }
-.review-card-kitsch {
-  background: #fff;
-  border: 2px solid var(--ink);
-  padding: 20px;
-  position: relative;
-  box-shadow: 4px 4px 0px var(--ink);
-  transition: transform 0.2s, box-shadow 0.2s;
+.review-item::before {
+  content: '';
+  flex-shrink: 0;
+  width: 1px;
+  height: 100%;
+  background: var(--gold);
+  opacity: 0.35;
+  margin-top: 4px;
+  min-height: 40px;
 }
-.review-card-kitsch:hover { transform: translate(-2px,-2px); box-shadow: 6px 6px 0px var(--ink); }
-.review-card-kitsch:nth-child(2) { background: #fffbe6; }
-.review-card-kitsch:nth-child(3) { background: #fef0f2; }
-.review-card-kitsch::before {
-  content: '"';
-  font-family: 'Black Han Sans', sans-serif;
-  font-size: 3rem;
-  color: var(--yellow);
-  position: absolute;
-  top: -12px; left: 12px;
-  line-height: 1;
-}
-.review-card-kitsch p {
-  font-family: 'Gaegu', cursive;
-  font-size: 1rem;
-  color: var(--ink);
-  line-height: 1.75;
-  padding-top: 8px;
+.review-item p {
+  font-family: 'Noto Serif KR', serif;
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  color: var(--ink-mid);
+  line-height: 1.85;
+  font-style: italic;
+  padding-left: 4px;
 }
 
 /* ══════════════════════════════
    여백 질문
 ══════════════════════════════ */
-.breath-section {
-  background: var(--ink);
-  padding: 72px 24px;
+.pause-section {
+  background: var(--paper);
+  padding: 80px 32px;
   text-align: center;
-  position: relative;
-  overflow: hidden;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
 }
-.breath-section::before {
-  content: '?';
-  font-family: 'Black Han Sans', sans-serif;
-  font-size: 50vw;
-  color: rgba(255,255,255,0.03);
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%,-50%);
-  line-height: 1;
-  pointer-events: none;
-}
-.breath-q {
-  font-family: 'Gaegu', cursive;
-  font-size: clamp(1.1rem, 3vw, 1.5rem);
-  color: var(--yellow);
-  line-height: 1.9;
+.pause-q {
+  font-family: 'Nanum Myeongjo', serif;
+  font-size: clamp(1rem, 2.8vw, 1.3rem);
+  color: var(--ink-mid);
+  line-height: 2;
   max-width: 480px;
   margin: 0 auto;
+  font-weight: 400;
 }
-.breath-q + .breath-q {
-  margin-top: 16px;
-  color: rgba(255,255,255,0.6);
-  font-size: clamp(0.9rem, 2.5vw, 1.15rem);
+.pause-q + .pause-q {
+  margin-top: 18px;
+  font-size: clamp(0.88rem, 2.2vw, 1.05rem);
+  color: var(--ink-light);
 }
 
 /* ══════════════════════════════
-   4. 에세이 미리보기
+   4. 에세이 맛보기
 ══════════════════════════════ */
 .essay-section {
-  background: var(--white);
-  padding: 80px 24px;
+  background: var(--paper);
+  padding: 100px 32px;
 }
-.essay-inner { max-width: 660px; margin: 0 auto; }
-
-/* 노트 스타일 */
-.essay-notebook {
-  background: #fff;
-  border: 2px solid var(--ink);
-  box-shadow: 6px 6px 0px var(--ink);
-  position: relative;
-  margin-top: 36px;
-  overflow: hidden;
+.essay-inner {
+  max-width: 600px;
+  margin: 0 auto;
 }
-.essay-notebook-header {
-  background: var(--blue);
-  padding: 12px 24px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.essay-notebook-header .nb-title {
-  font-family: 'Gaegu', cursive;
-  color: #fff;
-  font-size: 1.05rem;
-  letter-spacing: 0.1em;
-}
-.essay-notebook-header .nb-date {
-  font-family: 'Gaegu', cursive;
-  color: rgba(255,255,255,0.6);
-  font-size: 0.8rem;
-}
-/* 노트 줄 */
-.essay-notebook-body {
-  padding: 28px 28px;
-  background-image: repeating-linear-gradient(
-    to bottom,
-    transparent,
-    transparent 31px,
-    rgba(26,16,8,0.06) 31px,
-    rgba(26,16,8,0.06) 32px
-  );
-  background-size: 100% 32px;
-}
-.essay-title-hand {
-  font-family: 'Black Han Sans', sans-serif;
-  font-size: clamp(1.2rem, 3vw, 1.6rem);
+.essay-title {
+  font-family: 'Nanum Myeongjo', serif;
+  font-size: clamp(1.1rem, 2.8vw, 1.45rem);
+  font-weight: 700;
+  line-height: 1.5;
+  margin-top: 24px;
+  margin-bottom: 28px;
   color: var(--ink);
-  margin-bottom: 20px;
-  display: block;
 }
-.essay-body-text {
-  font-family: 'Noto Serif KR', serif;
-  font-size: clamp(0.88rem, 2vw, 0.98rem);
-  line-height: 2;
-  color: var(--ink);
-  opacity: 0.85;
-}
-.essay-body-text p { margin-bottom: 1.2em; }
-.essay-fade-wrap {
+.essay-fade {
   position: relative;
   max-height: 280px;
   overflow: hidden;
 }
-.essay-fade-wrap::after {
+.essay-fade::after {
   content: '';
   position: absolute;
   bottom: 0; left: 0; right: 0;
   height: 100px;
-  background: linear-gradient(to bottom, transparent, #fff);
+  background: linear-gradient(to bottom, transparent, var(--paper));
 }
-.essay-more-link {
+.essay-link {
   display: block;
   text-align: center;
-  padding: 16px;
-  border-top: 1px dashed rgba(26,16,8,0.15);
+  margin-top: 28px;
 }
-.essay-more-link a {
-  font-family: 'Gaegu', cursive;
-  font-size: 1rem;
-  color: var(--blue);
-  text-decoration: underline;
-  text-decoration-style: dotted;
-  text-underline-offset: 3px;
-  letter-spacing: 0.1em;
+.essay-link a {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 0.75rem;
+  color: var(--red);
+  text-decoration: none;
+  letter-spacing: 0.16em;
+  border-bottom: 1px solid rgba(168,32,26,0.25);
+  padding-bottom: 2px;
+  transition: border-color 0.2s;
 }
+.essay-link a:hover { border-color: var(--red); }
 
 /* ══════════════════════════════
-   5. 한자 카드
+   5. 한자 카드 + 파생 — 3열 패널
 ══════════════════════════════ */
 .hanzi-section {
-  background: var(--offwhite);
-  padding: 80px 24px;
-  position: relative;
-  overflow: hidden;
+  background: var(--ink);
+  padding: 100px 32px;
 }
-.hanzi-section::after {
-  content: '';
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  height: 4px;
-  background: repeating-linear-gradient(
-    90deg,
-    var(--red) 0, var(--red) 20px,
-    var(--yellow) 20px, var(--yellow) 40px,
-    var(--blue) 40px, var(--blue) 60px,
-    var(--green) 60px, var(--green) 80px
-  );
+.hanzi-inner {
+  max-width: 900px;
+  margin: 0 auto;
 }
-.hanzi-inner { max-width: 880px; margin: 0 auto; }
-.hanzi-layout {
+.hanzi-section .eyebrow { color: rgba(255,255,255,0.28); }
+.hanzi-section .section-title { color: #fff; }
+
+/* 메인 한자 + 설명 */
+.hanzi-main-row {
   display: grid;
   grid-template-columns: auto 1fr;
-  gap: 48px;
+  gap: 52px;
   align-items: start;
-  margin-top: 40px;
+  margin-top: 52px;
+  padding-bottom: 52px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
 }
-@media (max-width: 640px) { .hanzi-layout { grid-template-columns: 1fr; } }
-
-/* 한자 카드 — 스탬프 */
-.hanzi-stamp-card {
-  background: #fff;
-  border: 3px solid var(--ink);
-  padding: 24px 28px;
-  box-shadow: 6px 6px 0px var(--ink);
-  position: relative;
-  width: clamp(200px, 30vw, 280px);
-  flex-shrink: 0;
+@media (max-width: 600px) {
+  .hanzi-main-row { grid-template-columns: 1fr; gap: 32px; }
 }
-.hanzi-stamp-card .hs-char {
-  font-family: 'Black Han Sans', sans-serif;
-  font-size: clamp(5rem, 14vw, 9rem);
-  color: var(--ink);
+.hanzi-char-col { text-align: center; }
+.hc-char {
+  font-family: 'Nanum Myeongjo', serif;
+  font-size: clamp(6rem, 18vw, 10rem);
+  color: #fff;
   line-height: 0.85;
   display: block;
-  text-align: center;
+  margin-bottom: 12px;
 }
-.hanzi-stamp-card .hs-reading {
-  font-family: 'Gaegu', cursive;
-  font-size: 0.85rem;
-  color: var(--blue);
-  letter-spacing: 0.18em;
-  display: block;
-  text-align: center;
-  margin-top: 10px;
-}
-.hanzi-stamp-card .hs-meaning {
-  font-family: 'Gaegu', cursive;
-  font-size: 0.82rem;
-  color: rgba(26,16,8,0.55);
-  text-align: center;
-  margin-top: 4px;
-  line-height: 1.5;
-}
-/* 붉은 동그라미 도장 */
-.hanzi-stamp-card::after {
-  content: '마음을 잡아당기는 것';
-  position: absolute;
-  bottom: -18px; right: -18px;
-  width: 90px; height: 90px;
-  border: 3px solid var(--red);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'Gaegu', cursive;
-  font-size: 0.55rem;
-  color: var(--red);
-  text-align: center;
-  padding: 6px;
-  background: #fff;
-  line-height: 1.4;
-}
-
-.hanzi-story-col { display: flex; flex-direction: column; gap: 16px; }
-.hanzi-story-text {
-  font-family: 'Noto Serif KR', serif;
-  font-size: clamp(0.88rem, 2vw, 0.98rem);
-  color: var(--ink);
-  line-height: 2;
-  opacity: 0.85;
-}
-.hanzi-story-text p { margin-bottom: 0.8em; }
-.hanzi-story-text strong { color: var(--red); font-weight: 700; opacity: 1; }
-
-/* 파생 한자 리스트 */
-.derived-label {
-  font-family: 'Gaegu', cursive;
-  font-size: 0.75rem;
-  color: var(--blue);
+.hc-reading {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 0.65rem;
+  color: var(--gold-light);
   letter-spacing: 0.28em;
+  display: block;
+  margin-bottom: 4px;
+}
+.hc-sub {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.25);
+  line-height: 1.6;
+  font-style: italic;
+}
+
+.hanzi-story {
+  font-family: 'Noto Serif KR', serif;
+  font-size: clamp(0.86rem, 1.9vw, 0.96rem);
+  color: rgba(255,255,255,0.65);
+  line-height: 2.1;
+}
+.hanzi-story p { margin-bottom: 0.9em; }
+.hanzi-story strong { color: rgba(255,255,255,0.9); }
+
+/* 파생 한자 4개 — 균등 그리드 */
+.derived-label {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 0.62rem;
+  color: rgba(255,255,255,0.22);
+  letter-spacing: 0.32em;
   text-transform: uppercase;
-  margin-top: 24px;
-  margin-bottom: 16px;
+  margin-top: 44px;
+  margin-bottom: 24px;
   display: block;
 }
 .derived-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 14px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: rgba(255,255,255,0.06);
 }
-.derived-card {
-  background: #fff;
-  border: 2px solid var(--ink);
-  padding: 14px 16px;
-  box-shadow: 3px 3px 0px var(--ink);
-  transition: transform 0.15s, box-shadow 0.15s;
+@media (max-width: 660px) {
+  .derived-grid { grid-template-columns: 1fr; }
 }
-.derived-card:hover { transform: translate(-1px,-1px); box-shadow: 4px 4px 0px var(--ink); }
-.derived-card:nth-child(2) { border-color: var(--blue); box-shadow: 3px 3px 0px var(--blue); }
-.derived-card:nth-child(3) { border-color: var(--green); box-shadow: 3px 3px 0px var(--green); }
-.derived-card:nth-child(4) { border-color: var(--red); box-shadow: 3px 3px 0px var(--red); }
-.dc-top { display: flex; align-items: baseline; gap: 8px; margin-bottom: 6px; }
+.derived-cell {
+  background: var(--ink);
+  padding: 24px 22px;
+  transition: background 0.25s;
+}
+.derived-cell:hover { background: rgba(255,255,255,0.04); }
 .dc-char {
-  font-family: 'Black Han Sans', sans-serif;
-  font-size: 1.5rem; color: var(--ink); line-height: 1;
+  font-family: 'Nanum Myeongjo', serif;
+  font-size: 2rem;
+  color: #fff;
+  line-height: 1;
+  display: block;
+  margin-bottom: 8px;
 }
 .dc-name {
-  font-family: 'Gaegu', cursive;
-  font-size: 0.78rem; color: var(--blue); letter-spacing: 0.06em;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 0.65rem;
+  color: var(--gold-light);
+  letter-spacing: 0.14em;
+  display: block;
+  margin-bottom: 8px;
 }
 .dc-desc {
   font-family: 'Noto Serif KR', serif;
-  font-size: 0.78rem; color: rgba(26,16,8,0.65); line-height: 1.7;
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.45);
+  line-height: 1.75;
 }
 .dc-ex {
-  font-family: 'Gaegu', cursive;
-  font-size: 0.68rem; color: rgba(26,16,8,0.35);
-  margin-top: 4px; font-style: italic;
-}
-
-/* ══════════════════════════════
-   6. 이런 분께
-══════════════════════════════ */
-.for-section {
-  background: var(--white);
-  padding: 80px 24px;
-}
-.for-inner { max-width: 700px; margin: 0 auto; }
-.for-list { margin-top: 36px; display: flex; flex-direction: column; gap: 0; }
-.for-item {
-  display: flex; gap: 16px;
-  padding: 24px 0;
-  border-bottom: 2px dashed rgba(26,16,8,0.12);
-}
-.for-item:last-child { border-bottom: none; }
-.for-num {
-  font-family: 'Black Han Sans', sans-serif;
-  font-size: 1.6rem;
-  color: rgba(26,16,8,0.08);
-  flex-shrink: 0; width: 32px;
-  line-height: 1.4;
-}
-.for-text strong {
   font-family: 'Noto Sans KR', sans-serif;
-  font-size: 0.9rem; font-weight: 700;
-  display: block; margin-bottom: 4px; color: var(--ink);
-}
-.for-text span {
-  font-family: 'Gaegu', cursive;
-  font-size: 0.9rem; color: rgba(26,16,8,0.55); line-height: 1.7;
+  font-size: 0.65rem;
+  color: rgba(255,255,255,0.2);
+  margin-top: 6px;
+  display: block;
+  font-style: italic;
 }
 
 /* ══════════════════════════════
-   7. 구독 안내 + CTA
+   6. 3가지 — 당신이 받는 것
 ══════════════════════════════ */
-.info-section {
-  background: var(--ink);
-  padding: 80px 24px;
-  position: relative;
-  overflow: hidden;
+.value-section {
+  background: var(--paper-dark);
+  padding: 100px 32px;
 }
-.info-section::before {
-  content: '10,000';
-  font-family: 'Black Han Sans', sans-serif;
-  font-size: 30vw;
-  color: rgba(255,255,255,0.03);
-  position: absolute;
-  bottom: -5%; right: -5%;
-  line-height: 1; pointer-events: none;
-}
-.info-inner { max-width: 820px; margin: 0 auto; position: relative; z-index: 1; }
-.info-label-white {
-  font-family: 'Gaegu', cursive;
-  font-size: clamp(1.2rem, 3vw, 1.6rem);
-  color: var(--yellow);
-  display: block; margin-bottom: 8px;
-}
-.info-grid {
+.value-inner { max-width: 760px; margin: 0 auto; }
+.value-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px; margin-top: 40px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--line-mid);
+  margin-top: 48px;
+  border: 1px solid var(--line-mid);
 }
-@media (max-width: 600px) { .info-grid { grid-template-columns: 1fr; gap: 28px; } }
-.info-block h3 {
-  font-family: 'Gaegu', cursive;
-  font-size: 0.82rem; letter-spacing: 0.22em;
-  color: var(--yellow); margin-bottom: 16px; text-transform: uppercase;
+@media (max-width: 640px) {
+  .value-grid { grid-template-columns: 1fr; }
 }
-.info-list { list-style: none; }
-.info-list li {
-  font-family: 'Noto Serif KR', serif;
-  font-size: 0.85rem; color: rgba(255,255,255,0.68);
-  padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.05);
-  display: flex; gap: 10px; line-height: 1.7;
+.value-cell {
+  background: var(--paper-dark);
+  padding: 36px 28px;
 }
-.info-list li::before { content: '→'; color: var(--yellow); flex-shrink: 0; }
-.info-list li strong { color: #fff; }
-.notice-kitsch {
-  margin-top: 16px;
-  background: rgba(245,209,48,0.12);
-  border: 1px dashed var(--yellow);
-  padding: 12px 16px;
-  font-family: 'Gaegu', cursive;
-  font-size: 0.85rem;
-  color: rgba(255,255,255,0.5);
-  line-height: 1.8;
-}
-.notice-kitsch strong { color: var(--yellow); }
-
-/* CTA 박스 */
-.cta-box {
-  margin-top: 52px;
-  background: var(--white);
-  padding: 40px 32px;
-  text-align: center;
-  position: relative;
-}
-.cta-box::before {
-  content: '';
-  position: absolute;
-  top: -12px; left: 50%;
-  transform: translateX(-50%);
-  width: 80px; height: 22px;
-  background: var(--yellow);
-  border-radius: 2px;
-}
-.cta-deadline {
-  font-family: 'Gaegu', cursive;
-  font-size: 0.85rem;
-  color: var(--red);
-  letter-spacing: 0.12em;
+.vc-num {
+  font-family: 'Nanum Myeongjo', serif;
+  font-size: 2rem;
+  color: rgba(30,26,20,0.07);
+  line-height: 1;
   margin-bottom: 16px;
   display: block;
 }
-.cta-price {
-  font-family: 'Black Han Sans', sans-serif;
-  font-size: clamp(2.2rem, 6vw, 3rem);
+.vc-title {
+  font-family: 'Nanum Myeongjo', serif;
+  font-size: 1.05rem;
+  font-weight: 700;
   color: var(--ink);
-  line-height: 1;
-  margin-bottom: 4px;
+  margin-bottom: 10px;
+  display: block;
 }
-.cta-price-sub {
-  font-family: 'Gaegu', cursive;
-  font-size: 0.85rem;
-  color: rgba(26,16,8,0.45);
-  margin-bottom: 28px;
-  letter-spacing: 0.08em;
+.vc-tag {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 0.62rem;
+  color: var(--gold);
+  letter-spacing: 0.18em;
+  display: block;
+  margin-bottom: 12px;
+  text-transform: uppercase;
 }
-.btn-cta-kitsch {
-  background: var(--red);
-  color: #fff;
-  border: none;
-  padding: 16px 52px;
-  font-family: 'Black Han Sans', sans-serif;
-  font-size: clamp(1rem, 2.5vw, 1.2rem);
-  letter-spacing: 0.12em;
-  cursor: pointer;
-  border-radius: 2px;
-  box-shadow: 5px 5px 0px var(--ink);
-  transition: transform 0.15s, box-shadow 0.15s;
-}
-.btn-cta-kitsch:hover { transform: translate(-2px,-2px); box-shadow: 7px 7px 0px var(--ink); }
-.cta-note {
-  font-family: 'Gaegu', cursive;
-  font-size: 0.8rem;
-  color: rgba(26,16,8,0.4);
-  margin-top: 12px;
-  line-height: 1.7;
+.vc-desc {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 0.83rem;
+  color: var(--ink-mid);
+  line-height: 1.85;
 }
 
 /* ══════════════════════════════
-   8. 8월 테마 예고
+   7. 이런 분께
+══════════════════════════════ */
+.for-section {
+  background: var(--paper);
+  padding: 100px 32px;
+}
+.for-inner { max-width: 600px; margin: 0 auto; }
+.for-list { margin-top: 44px; }
+.for-item {
+  display: grid;
+  grid-template-columns: 20px 1fr;
+  gap: 20px;
+  padding: 22px 0;
+  border-bottom: 1px solid var(--line);
+}
+.for-item:last-child { border-bottom: none; }
+.fi-num {
+  font-family: 'Nanum Myeongjo', serif;
+  font-size: 0.75rem;
+  color: var(--ink-light);
+  padding-top: 3px;
+}
+.fi-text strong {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--ink);
+  display: block;
+  margin-bottom: 5px;
+}
+.fi-text span {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 0.8rem;
+  color: var(--ink-light);
+  line-height: 1.8;
+}
+
+/* ══════════════════════════════
+   8. 구독 안내 + CTA
+══════════════════════════════ */
+.sub-section {
+  background: var(--ink);
+  padding: 100px 32px;
+}
+.sub-inner { max-width: 760px; margin: 0 auto; }
+.sub-section .eyebrow { color: rgba(255,255,255,0.22); }
+.sub-section .section-title { color: #fff; }
+
+.sub-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 52px;
+  margin-top: 48px;
+}
+@media (max-width: 580px) { .sub-grid { grid-template-columns: 1fr; gap: 36px; } }
+
+.sub-block h3 {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.3em;
+  color: var(--gold-light);
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+.sub-list { list-style: none; }
+.sub-list li {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.55);
+  padding: 9px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  display: flex;
+  gap: 12px;
+  line-height: 1.7;
+}
+.sub-list li::before { content: '—'; color: rgba(140,109,63,0.5); flex-shrink: 0; }
+.sub-list li strong { color: rgba(255,255,255,0.85); }
+
+.notice {
+  margin-top: 16px;
+  padding: 14px 18px;
+  border: 1px solid rgba(255,255,255,0.07);
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.28);
+  line-height: 1.8;
+}
+.notice strong { color: var(--gold-light); }
+
+/* CTA 블록 */
+.cta-block {
+  margin-top: 64px;
+  text-align: center;
+  padding-top: 52px;
+  border-top: 1px solid rgba(255,255,255,0.07);
+}
+.cta-deadline {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  color: var(--red);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 20px;
+}
+.cta-price {
+  font-family: 'Nanum Myeongjo', serif;
+  font-size: clamp(2rem, 6vw, 2.8rem);
+  color: #fff;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.cta-price-sub {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.22);
+  letter-spacing: 0.14em;
+  margin-bottom: 32px;
+}
+.btn-cta {
+  background: none;
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.35);
+  padding: 15px 52px;
+  font-family: 'Noto Serif KR', serif;
+  font-size: 0.95rem;
+  letter-spacing: 0.14em;
+  cursor: pointer;
+  transition: background 0.3s, border-color 0.3s;
+}
+.btn-cta:hover {
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(255,255,255,0.6);
+}
+.cta-note {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 0.68rem;
+  color: rgba(255,255,255,0.18);
+  letter-spacing: 0.1em;
+  margin-top: 14px;
+  line-height: 1.9;
+}
+
+/* ══════════════════════════════
+   9. 8월 테마 예고
 ══════════════════════════════ */
 .theme-section {
-  background: var(--offwhite);
-  padding: 80px 24px;
-  border-top: 4px solid var(--ink);
+  background: var(--paper);
+  padding: 100px 32px;
+  border-top: 1px solid var(--line);
 }
-.theme-inner { max-width: 700px; margin: 0 auto; }
-.theme-intro-text {
+.theme-inner { max-width: 640px; margin: 0 auto; }
+.theme-intro {
   font-family: 'Noto Serif KR', serif;
-  font-size: clamp(0.88rem, 2vw, 0.98rem);
-  color: rgba(26,16,8,0.75);
-  line-height: 2;
+  font-size: clamp(0.88rem, 2vw, 0.96rem);
+  color: var(--ink-mid);
+  line-height: 2.1;
   margin-top: 24px;
 }
 .theme-chars {
   display: grid;
-  grid-template-columns: repeat(2,1fr);
-  gap: 16px; margin-top: 32px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: var(--line);
+  margin-top: 36px;
+  border: 1px solid var(--line);
 }
 @media (max-width: 500px) { .theme-chars { grid-template-columns: 1fr; } }
-.theme-char-card {
-  background: #fff;
-  border: 2px solid var(--ink);
-  padding: 18px;
-  box-shadow: 3px 3px 0px var(--ink);
-  display: flex; align-items: flex-start; gap: 14px;
+.tc-cell {
+  background: var(--paper);
+  padding: 28px 24px;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
 }
-.theme-char-card:nth-child(2) { transform: rotate(0.5deg); }
-.theme-char-card:nth-child(3) { transform: rotate(-0.5deg); }
-.tc-char {
-  font-family: 'Black Han Sans', sans-serif;
-  font-size: 2.2rem; color: var(--red); line-height: 1; flex-shrink: 0;
+.tc-c {
+  font-family: 'Nanum Myeongjo', serif;
+  font-size: 1.8rem;
+  color: var(--red);
+  line-height: 1;
+  flex-shrink: 0;
+  margin-top: 2px;
+  opacity: 0.85;
 }
-.tc-name {
-  font-family: 'Gaegu', cursive;
-  font-size: 0.75rem; color: var(--blue); letter-spacing: 0.1em; margin-bottom: 4px; display: block;
+.tc-n {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 0.65rem;
+  color: var(--gold);
+  letter-spacing: 0.14em;
+  display: block;
+  margin-bottom: 5px;
 }
-.tc-desc {
+.tc-d {
   font-family: 'Noto Serif KR', serif;
-  font-size: 0.82rem; color: rgba(26,16,8,0.65); line-height: 1.65;
+  font-size: 0.82rem;
+  color: var(--ink-mid);
+  line-height: 1.7;
 }
-.theme-closing-hand {
-  font-family: 'Gaegu', cursive;
-  font-size: clamp(0.9rem, 2.2vw, 1.05rem);
-  color: rgba(26,16,8,0.6);
-  line-height: 2;
-  margin-top: 32px;
-  border-top: 2px dashed rgba(26,16,8,0.12);
-  padding-top: 24px;
+.theme-closing {
+  font-family: 'Noto Serif KR', serif;
+  font-size: clamp(0.85rem, 2vw, 0.94rem);
+  color: var(--ink-light);
+  line-height: 2.1;
+  margin-top: 36px;
+  padding-top: 28px;
+  border-top: 1px solid var(--line);
 }
 
 /* ══════════════════════════════
-   9. FAQ
+   10. FAQ
 ══════════════════════════════ */
 .faq-section {
-  background: var(--white);
-  padding: 80px 24px;
-  border-top: 4px solid var(--ink);
+  background: var(--paper-dark);
+  padding: 100px 32px;
+  border-top: 1px solid var(--line);
 }
-.faq-inner { max-width: 640px; margin: 0 auto; }
-details.faq-item { border-bottom: 2px dashed rgba(26,16,8,0.12); }
+.faq-inner { max-width: 600px; margin: 0 auto; }
+details.faq-item { border-bottom: 1px solid var(--line); }
 details.faq-item summary {
   padding: 18px 0;
   font-family: 'Noto Serif KR', serif;
-  font-size: 0.9rem; font-weight: 700; color: var(--ink);
-  cursor: pointer; list-style: none;
-  display: flex; justify-content: space-between; align-items: center; gap: 12px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--ink);
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
   user-select: none;
 }
 details.faq-item summary::-webkit-details-marker { display: none; }
-details.faq-item summary .faq-icon {
-  font-family: 'Black Han Sans', sans-serif;
-  font-size: 1.2rem; color: var(--red); flex-shrink: 0;
-  transition: transform 0.3s;
+details.faq-item summary .fi {
+  color: var(--red);
+  flex-shrink: 0;
+  font-size: 1rem;
   line-height: 1;
+  transition: transform 0.3s;
+  font-weight: 300;
 }
-details.faq-item[open] summary .faq-icon { transform: rotate(45deg); }
+details.faq-item[open] summary .fi { transform: rotate(45deg); }
 details.faq-item .faq-body {
   padding: 0 0 18px;
   font-family: 'Noto Serif KR', serif;
-  font-size: 0.85rem; color: rgba(26,16,8,0.6); line-height: 1.9;
+  font-size: 0.85rem;
+  color: var(--ink-mid);
+  line-height: 1.9;
 }
 
 /* ══════════════════════════════
-   푸터 CTA
+   11. 저자 상세 + 푸터 CTA
 ══════════════════════════════ */
-.footer-cta {
-  background: var(--red);
-  padding: 80px 24px;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
+.author-detail {
+  background: var(--ink);
+  padding: 100px 32px;
 }
-.footer-cta::before {
-  content: '急';
-  font-family: 'Black Han Sans', sans-serif;
-  font-size: 60vw;
-  color: rgba(0,0,0,0.06);
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%,-50%);
-  pointer-events: none; line-height: 1;
-}
-.footer-inner { position: relative; z-index: 1; }
-.footer-slogan {
-  font-family: 'Black Han Sans', sans-serif;
-  font-size: clamp(1.4rem, 4vw, 2.2rem);
+.author-detail-inner { max-width: 600px; margin: 0 auto; }
+.author-detail .eyebrow { color: rgba(255,255,255,0.22); }
+.author-detail-name {
+  font-family: 'Nanum Myeongjo', serif;
+  font-size: clamp(1.4rem, 3.5vw, 1.9rem);
   color: #fff;
-  line-height: 1.5;
-  margin-bottom: 12px;
-  letter-spacing: 0.04em;
+  font-weight: 700;
+  margin: 10px 0 6px;
+}
+.author-detail-role {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 0.68rem;
+  color: var(--gold-light);
+  letter-spacing: 0.18em;
+  margin-bottom: 28px;
+  padding-bottom: 22px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  line-height: 1.9;
+}
+.author-detail-bio {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.author-detail-bio p {
+  font-family: 'Noto Serif KR', serif;
+  font-size: clamp(0.85rem, 1.9vw, 0.94rem);
+  color: rgba(255,255,255,0.55);
+  line-height: 2;
+}
+.author-detail-bio strong { color: rgba(255,255,255,0.85); }
+
+/* 푸터 CTA */
+.footer-cta {
+  background: var(--paper);
+  padding: 100px 32px;
+  text-align: center;
+  border-top: 1px solid var(--line);
+}
+.footer-slogan {
+  font-family: 'Nanum Myeongjo', serif;
+  font-size: clamp(1.1rem, 3vw, 1.5rem);
+  color: var(--ink-mid);
+  line-height: 1.85;
+  margin-bottom: 48px;
 }
 .footer-slogan em {
   font-style: normal;
-  display: block;
-  font-family: 'Gaegu', cursive;
-  font-size: clamp(1rem, 2.5vw, 1.3rem);
-  opacity: 0.8;
-  font-weight: 400;
-  margin-top: 8px;
+  color: var(--ink);
+  font-weight: 700;
 }
-.btn-footer {
-  background: #fff;
-  color: var(--red);
-  border: none;
-  padding: 16px 48px;
-  font-family: 'Black Han Sans', sans-serif;
-  font-size: clamp(1rem, 2.5vw, 1.2rem);
-  letter-spacing: 0.1em;
-  cursor: pointer;
-  border-radius: 2px;
-  box-shadow: 5px 5px 0px rgba(0,0,0,0.2);
-  margin-top: 36px;
-  transition: transform 0.15s, box-shadow 0.15s;
-}
-.btn-footer:hover { transform: translate(-2px,-2px); box-shadow: 7px 7px 0px rgba(0,0,0,0.2); }
 .footer-deadline {
-  font-family: 'Gaegu', cursive;
-  font-size: 0.85rem;
-  color: rgba(255,255,255,0.6);
-  letter-spacing: 0.12em;
-  margin-top: 16px;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 0.65rem;
+  color: var(--ink-light);
+  letter-spacing: 0.22em;
+  margin-top: 18px;
+  text-transform: uppercase;
 }
 
-/* ══════════════════════════════
-   MODAL
-══════════════════════════════ */
+/* ══════ MODAL ══════ */
 .modal-overlay {
   display: none; position: fixed; inset: 0;
-  background: rgba(0,0,0,0.75); z-index: 9000;
-  place-items: center; backdrop-filter: blur(4px);
+  background: rgba(10,8,5,0.75); z-index: 9000;
+  place-items: center; backdrop-filter: blur(6px);
 }
 .modal-overlay.open { display: grid; }
 .modal-box {
-  background: var(--white); width: 92%; max-width: 480px;
-  border: 3px solid var(--ink);
-  box-shadow: 8px 8px 0px var(--ink);
+  background: var(--paper); width: 92%; max-width: 480px;
+  border: 1px solid var(--line-mid);
   overflow: hidden; max-height: 90svh;
   display: flex; flex-direction: column;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.28);
 }
 .modal-head {
   background: var(--ink); color: #fff;
-  padding: 16px 20px;
+  padding: 18px 22px;
   display: flex; justify-content: space-between; align-items: center; gap: 12px;
 }
 .modal-head h2 {
-  font-family: 'Black Han Sans', sans-serif;
-  font-size: 1rem; letter-spacing: 0.1em;
+  font-family: 'Nanum Myeongjo', serif;
+  font-size: 0.95rem; font-weight: 400; letter-spacing: 0.1em;
 }
 .modal-price {
-  font-family: 'Gaegu', cursive;
-  font-size: 0.85rem; color: var(--yellow); white-space: nowrap;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 0.65rem; color: var(--gold-light); letter-spacing: 0.14em; white-space: nowrap;
 }
 .modal-close {
   background: none; border: none;
-  color: rgba(255,255,255,0.5); font-size: 1.4rem;
-  cursor: pointer; padding: 4px; transition: color 0.2s; flex-shrink: 0;
+  color: rgba(255,255,255,0.35); font-size: 1.3rem;
+  cursor: pointer; flex-shrink: 0; transition: color 0.2s;
 }
 .modal-close:hover { color: #fff; }
 .modal-body { flex: 1; overflow: hidden; }
@@ -1113,61 +957,41 @@ details.faq-item .faq-body {
 
 /* FLOATING */
 .floating-btn {
-  position: fixed; bottom: 22px; right: 22px;
-  z-index: 8000; opacity: 0; transform: translateY(12px);
+  position: fixed; bottom: 24px; right: 24px;
+  z-index: 8000; opacity: 0; transform: translateY(10px);
   transition: opacity 0.4s, transform 0.4s; pointer-events: none;
 }
 .floating-btn.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
 .floating-btn button {
-  background: var(--red); color: #fff; border: none;
-  padding: 12px 22px;
-  font-family: 'Black Han Sans', sans-serif;
-  font-size: 0.88rem; letter-spacing: 0.08em;
-  border-radius: 2px; cursor: pointer;
-  box-shadow: 4px 4px 0px var(--ink);
-  transition: transform 0.15s, box-shadow 0.15s;
+  background: var(--ink); color: #fff; border: none;
+  padding: 12px 24px;
+  font-family: 'Noto Serif KR', serif;
+  font-size: 0.82rem; letter-spacing: 0.1em;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.28);
+  transition: opacity 0.2s;
 }
-.floating-btn button:hover { transform: translate(-1px,-1px); box-shadow: 5px 5px 0px var(--ink); }
+.floating-btn button:hover { opacity: 0.85; }
 </style>
 </head>
 <body>
 
 <!-- ══ 1. HERO ══ -->
 <section class="hero">
-  <div class="hero-watermark">急</div>
-  <div class="deco-circle dc-1"></div>
-  <div class="deco-circle dc-2"></div>
-  <div class="deco-circle dc-3"></div>
-
-  <span class="sticker-date">2026 · 7월 체험판</span>
-  <span class="sticker-price">월 10,000원</span>
-
+  <div class="hero-bg">急</div>
   <div class="hero-inner">
-    <span class="hero-brand">✦ 한자의 아침 ✦</span>
-
-    <div class="hero-hanzi-sticker">
-      <span class="hero-hanzi-char">急</span>
-    </div>
-    <span class="hero-reading">급할 급 · jí</span>
-
-    <div class="hero-postit">
-      <p>매일 바쁜데,<br><strong>정작 나를 위한 시간이 없습니다.</strong></p>
-    </div>
-
+    <span class="hero-badge">한자의 아침 · 2026 · 8월</span>
+    <span class="hero-char">急</span>
+    <div class="hero-char-line"></div>
+    <span class="hero-reading">급할 급 · jí · 마음을 잡아당기는 것</span>
+    <p class="hero-line1">매일 바쁜데,</p>
+    <p class="hero-line2">정작 나를 위한 시간이 없습니다.</p>
     <p class="hero-question">"지금 당신을 급하게 만드는 것은 무엇인가요?"</p>
-
     <div class="hero-cta">
-      <button class="btn-stamp" onclick="openModal()">8월 구독 신청하기 — 10,000원</button>
-      <span style="font-family:'Gaegu',cursive;font-size:0.75rem;color:rgba(26,16,8,0.38);letter-spacing:0.1em;">4주 · 매주 월요일 아침 7시 · 입금 후 확정</span>
-      <button class="btn-ghost-hand" onclick="document.getElementById('essay-sec').scrollIntoView({behavior:'smooth'})">먼저 읽어보기 ↓</button>
+      <button class="btn-main" onclick="openModal()">8월 구독 신청하기</button>
+      <span class="btn-price">월 10,000원 · 4주 · 입금 후 확정</span>
+      <button class="btn-scroll" onclick="document.getElementById('essay-sec').scrollIntoView({behavior:'smooth'})">먼저 읽어보기 ↓</button>
     </div>
-  </div>
-
-  <div class="hero-scroll-hint">
-    <div class="scroll-dots">
-      <span></span><span></span><span></span>
-    </div>
-    <span>scroll</span>
   </div>
 </section>
 
@@ -1175,235 +999,195 @@ details.faq-item .faq-body {
 <!-- ══ 2. 작가 소개 ══ -->
 <section class="author-section">
   <div class="author-inner">
-    <div class="reveal-r">
-      <div class="author-polaroid">
-        <div class="polaroid-tape-tl"></div>
-        <div class="polaroid-tape-tr"></div>
-        <div class="author-polaroid-frame">
-          <img src="https://i.imgur.com/jcUWkFZ.jpeg" alt="고석수 작가" />
-        </div>
+    <div class="reveal">
+      <div class="author-photo-wrap">
+        <img class="author-photo" src="https://i.imgur.com/USIjGUD.png" alt="고석수 작가" />
       </div>
     </div>
-
-    <div class="author-text-col reveal">
-      <span class="author-name-stamp">고석수</span>
-      <div class="author-tag-hand">
+    <div class="author-text reveal d1">
+      <span class="eyebrow">저자 소개</span>
+      <h2 class="author-name">고석수</h2>
+      <p class="author-role">
         작가 · 철학인문학 대안학교 지혜학교 교사<br>
-        일본, 중국, 대만 한자문명권을 오가며<br>
-        삶의 언어를 탐구합니다.
-      </div>
-      <div class="stat-stickers">
-        <div class="stat-sticker">
-          <span class="s-num">19기</span>
-          <span class="s-label">연속 발행</span>
+        일본, 중국, 대만 한자문명권을 오가며 삶의 언어를 탐구합니다.
+      </p>
+      <div class="author-stats-row">
+        <div class="stat">
+          <span class="stat-n">19기</span>
+          <span class="stat-l">연속 발행</span>
         </div>
-        <div class="stat-sticker">
-          <span class="s-num">90편+</span>
-          <span class="s-label">누적 에세이</span>
+        <div class="stat">
+          <span class="stat-n">90편+</span>
+          <span class="stat-l">누적 에세이</span>
         </div>
-        <div class="stat-sticker">
-          <span class="s-num">매주 월요일</span>
-          <span class="s-label">오전 7시 발송</span>
+        <div class="stat">
+          <span class="stat-n">월요일 7시</span>
+          <span class="stat-l">매주 발송</span>
         </div>
       </div>
-      <div class="author-bio-text">
-        <p>"나는 누구일까?" — 아직도 일곱 살의 질문이 기억납니다. 명문대, 대기업을 쫓았지만 해소되지 않는 갈증은 여전했습니다.</p>
-        <p>저는 길을 나섰습니다. 서아시아에서 시작한 방황 끝에 대만과 일본에 머물게 되었고, 비로소 <strong>동아시아와 한자(漢字)를 성찰</strong>할 수 있었습니다.</p>
-        <p>현재 '산소모험스쿨'에서 생태와 마음을 잇는 프로그램을 나누며, 매주 월요일 아침 독자에게 한 글자를 건넵니다.</p>
-      </div>
+
     </div>
   </div>
 </section>
 
 
 <!-- ══ 3. 독자의 말 ══ -->
-<section class="reviews-section">
-  <div class="reviews-inner">
-    <span class="section-label-hand reveal">독자의 말</span>
-    <p class="section-sub-hand reveal">읽고 난 뒤, 이런 말을 남겼습니다</p>
-    <div class="review-cards">
-      <div class="review-card-kitsch reveal">
-        <p>問 한자를 보니 양 옆의 대문이 우리 가슴의 흉골처럼 보였습니다. 마음의 문을 열었을 때, 비로소 진짜 질문이 나오는 것이 아닐까.</p>
-      </div>
-      <div class="review-card reveal reveal-delay-1">
-        <p>서툰 동행이라는 말이 마음에 깊이 남았습니다. 방황하는 준후와 함께 길을 걸으며 화도 내고, 그래도 끝까지 함께했던 석수님.</p>
-      </div>
-      <div class="review-card reveal reveal-delay-2">
-        <p>아이들과 함께 아이들처럼 같이 노는 어른이 되고 싶습니다. 그런 어른들이 있는 마을이었으면 좋겠어요.</p>
-      </div>
-      <div class="review-card reveal">
-        <p>청소년의 놀이는 규칙 안에서 자유를 느끼게 하고, 동시에 경계를 알게 하는 역할입니다. 그 경계를 따뜻하게 설계하는 것이 교사의 일이라는 생각을 깊이 되새겨봅니다.</p>
-      </div>
-      <div class="review-card reveal reveal-delay-1">
-        <p>나의 무거움을 가볍게 받아주고, 말없이 앉아있는 나를 밀쳐내지 않고, 눈을 지그시 바라봐주던 선생님. 그분은 내게 진짜 스승이었습니다.</p>
-      </div>
+<section class="review-section">
+  <div class="review-inner">
+    <span class="eyebrow reveal">독자의 말</span>
+    <div class="review-item reveal d1">
+      <p>"파생한자에 대한 설명도 공명되는 바가 큽니다. 그 중에 害를 풀이한 문장, 고개를 끄덕이게 되네요. '집(宀) 안에 丰이 들어 있는 글자입니다. 무성함은 생명이지만, 안에만 쌓이면 답답함이 됩니다. 가지를 치지 않은 나무가 햇빛을 가리듯, 놓지 못한 마음은 결국 자신과 주변을 함께 해치게 됩니다.' 고맙습니다~♡"</p>
+    </div>
+    <div class="review-item reveal d2">
+      <p>"善의 상형문자를 마주합니다. 하늘에 바치는 염소머리 양쪽에 말씀 言이 나란히 존재하네요. 좋음과 아름다움의 상태가 이거구나, 울림을 받습니다."</p>
+    </div>
+    <div class="review-item reveal d3">
+      <p>"問 한자를 보니 양 옆의 대문이 우리 가슴의 흉골처럼 보였습니다. 마음의 문을 열었을 때, 비로소 진짜 질문이 나오는 것이 아닐까. 그 질문이 오늘도 나를 움직이게 합니다."</p>
+    </div>
+    <div class="review-item reveal d4">
+      <p>"끝까지 읽으면 평안이 찾아옵니다."</p>
     </div>
   </div>
 </section>
 
 
 <!-- ══ 여백 질문 1 ══ -->
-<div class="breath-section reveal">
-  <p class="breath-q">요즘 내 마음을 가장 조급하게 만드는 것은 무엇인가요?</p>
-  <p class="breath-q">결과를 앞당기려다 지금의 과정을 놓친 적이 있었나요?</p>
+<div class="pause-section reveal">
+  <p class="pause-q">요즘 내 마음을 가장 조급하게 만드는 것은 무엇인가요?</p>
+  <p class="pause-q">결과를 앞당기려다 지금의 과정을 놓친 적이 있었나요?</p>
 </div>
 
 
 <!-- ══ 4. 에세이 미리보기 ══ -->
 <section class="essay-section" id="essay-sec">
   <div class="essay-inner">
-    <span class="section-label-hand reveal">실제 에세이 미리보기</span>
-    <p class="section-sub-hand reveal">이런 글이 매주 월요일 아침 도착합니다</p>
-
-    <div class="essay-notebook reveal">
-      <div class="essay-notebook-header">
-        <span class="nb-title">기다림을 달리는 법</span>
-        <span class="nb-date">7월 1주차 · 急</span>
+    <span class="eyebrow reveal">실제 에세이 미리보기</span>
+    <h2 class="section-title reveal">이런 글이<br>매주 월요일 아침 도착합니다</h2>
+    <div class="thin-rule reveal"></div>
+    <h3 class="essay-title reveal">기다림을 달리는 법</h3>
+    <div class="essay-fade reveal">
+      <div class="body-text">
+        <p>여러분은 기다리는 시간을 잘 견디는 편인가요? 저는 그렇지 못합니다. 결과를 빨리 알고 싶고, 계획은 예정대로 흘러가야 마음이 놓입니다. 일이 조금만 늦어져도 마음은 먼저 결승선에 가 있습니다. 아직 시작도 하지 않았는데 실패를 걱정하고, 보이지 않는 미래를 혼자 앞당겨 살아갑니다.</p>
+        <p>그런 제게 달리기는 기다림을 배우는 시간입니다. 저는 3년째 대마도 하프 마라톤에 참가하고 있습니다. 매년 6월 마지막 일요일이면 부산에서 한 시간 남짓 배를 타고 일본의 서쪽 끝 작은 섬에 닿습니다. 바다를 따라 이어지는 길, 이름도 모르는 주민들의 응원, 그리고 21킬로미터를 함께 달리는 사람들.</p>
+        <p>올해는 조금 달랐습니다. 지혜학교 학생 다섯 명이 함께했습니다. 대부분 일본은 처음이었고, 하프마라톤은 더더욱 처음이었습니다. 웃음 끝에는 같은 질문이 숨어 있었습니다. '정말 21킬로미터를 달릴 수 있을까.'</p>
       </div>
-      <div class="essay-notebook-body">
-        <div class="essay-fade-wrap">
-          <div class="essay-body-text">
-            <p>여러분은 기다리는 시간을 잘 견디는 편인가요? 저는 그렇지 못합니다. 결과를 빨리 알고 싶고, 계획은 예정대로 흘러가야 마음이 놓입니다. 일이 조금만 늦어져도 마음은 먼저 결승선에 가 있습니다. 아직 시작도 하지 않았는데 실패를 걱정하고, 보이지 않는 미래를 혼자 앞당겨 살아갑니다. 어쩌면 우리는 모두 조금씩 그런 조급함을 안고 살아가는지도 모르겠습니다.</p>
-            <p>그런 제게 달리기는 기다림을 배우는 시간입니다. 저는 3년째 대마도 하프 마라톤에 참가하고 있습니다. 매년 6월 마지막 일요일이면 부산에서 한 시간 남짓 배를 타고 일본의 서쪽 끝 작은 섬에 닿습니다. 바다를 따라 이어지는 길, 이름도 모르는 주민들의 응원, 그리고 21킬로미터를 함께 달리는 사람들. 제게 이곳은 기록을 세우는 대회가 아니라 사람을 만나는 장소입니다.</p>
-            <p>올해는 조금 달랐습니다. 지혜학교 학생 다섯 명이 함께했습니다. 대부분 일본은 처음이었고, 하프마라톤은 더더욱 처음이었습니다. 부산항에서는 해외 여행을 앞둔 아이들이 사진을 찍으며 웃었지만, 웃음 끝에는 같은 질문이 숨어 있었습니다. '정말 21킬로미터를 달릴 수 있을까.'</p>
-          </div>
-        </div>
-        <div class="essay-more-link">
-          <a href="https://blog.naver.com/sansocamp/224350249808" target="_blank">에세이 전문 읽기 →</a>
-        </div>
-      </div>
+    </div>
+    <div class="essay-link reveal">
+      <a href="https://blog.naver.com/sansocamp/224350249808" target="_blank">에세이 전문 읽기 →</a>
     </div>
   </div>
 </section>
 
 
 <!-- ══ 여백 질문 2 ══ -->
-<div class="breath-section reveal">
-  <p class="breath-q">기다림 속에서 오히려 배운 것이 있다면 무엇인가요?</p>
+<div class="pause-section reveal">
+  <p class="pause-q">기다림 속에서 오히려 배운 것이 있다면 무엇인가요?</p>
 </div>
 
 
-<!-- ══ 5. 한자 카드 + 파생 ══ -->
+<!-- ══ 5. 한자 카드 ══ -->
 <section class="hanzi-section">
   <div class="hanzi-inner">
-    <span class="section-label-hand reveal">한자 카드 + 파생 한자</span>
-    <p class="section-sub-hand reveal">한 글자에서 세계가 열립니다</p>
+    <span class="eyebrow reveal">한자 카드 + 파생 한자</span>
+    <h2 class="section-title reveal">한 글자에서<br>세계가 열립니다</h2>
 
-    <div class="hanzi-layout reveal">
-      <div class="hanzi-stamp-card">
-        <span class="hs-char">急</span>
-        <span class="hs-reading">급할 급 </span>
-        <span class="hs-meaning">及(미칠 급) + 心(마음 심)<br>손끝이 닿으려는 마음</span>
+    <div class="hanzi-main-row reveal">
+      <div class="hanzi-char-col">
+        <span class="hc-char">急</span>
+        <span class="hc-reading">급할 급 · jí</span>
+        <span class="hc-sub">及(미칠 급) + 心(마음 심)<br>손끝이 닿으려는 마음</span>
       </div>
+      <div class="hanzi-story reveal d1">
+        <p>及은 앞서가는 사람을 향해 뒤에서 <strong>손을 뻗는 모습</strong>입니다. 손끝은 아직 닿지 않았습니다.</p>
+        <p>그래서 사람은 한 걸음 더 내딛습니다. 이는 억지로 끌어당기는 것이 아니라, 마침내 닿는 순간입니다.</p>
+        <p>急은 그 손 아래 <strong>마음(心)</strong>이 얹혀 있습니다. 닿으려는 마음, 앞당기려는 마음이 곧 조급함의 본질입니다. 잡아당겨지는 방향이 어디인지 알면, 비로소 멈출 수 있습니다.</p>
+      </div>
+    </div>
 
-      <div class="hanzi-story-col">
-        <div class="hanzi-story-text">
-          <p>及은 앞서가는 사람을 향해 뒤에서 <strong>손을 뻗는 모습</strong>입니다. 손끝은 아직 닿지 않았습니다.</p>
-          <p>조금만 더. 조금만 빨리. 손끝은 이미 닿을 듯하지만, 마음은 그보다 더 먼저 달려갑니다.</p>
-          <p>急은 시간이 부족한 상태보다 마음이 앞질러 달리는 상태에 가깝습니다.</p>
-        </div>
-
-        <span class="derived-label">急에서 뻗어나온 한자들</span>
-        <div class="derived-grid">
-          <div class="derived-card">
-            <div class="dc-top">
-              <span class="dc-char">級</span>
-              <span class="dc-name">등급 급</span>
-            </div>
-            <div class="dc-desc">級은 실(糸)과 及이 합쳐진 글자입니다.
-한 가닥의 실은 짧고 가늘지만,
-그 실을 하나씩 이어가면 긴 줄이 됩니다.
-등급은 한 번에 뛰어오르는 높이가 아니라,
-실을 잇듯 차근차근 쌓여 가는 단계입니다.
-</div>
-         </div>
-          <div class="derived-card">
-            <div class="dc-top">
-              <span class="dc-char">吸</span>
-              <span class="dc-name">숨 들이쉴 흡</span>
-            </div>
-            <div class="dc-desc">吸은 입(口)과 及이 만난 글자입니다.
-
-손으로 앞사람을 붙잡으려 하기보다 먼저 숨을 들이마십니다.
-
-숨은 바깥세상을 몸 안으로 들이는 움직임입니다.
-급한 마음은 숨을 짧게 만들지만,
-깊은 숨은 마음의 속도를 다시 몸으로 돌려놓습니다.
-
-</div>
-          </div>
-          <div class="derived-card">
-            <div class="dc-top">
-              <span class="dc-char">𢚩</span>
-              <span class="dc-name">급의 속자</span>
-            </div>
-            <div class="dc-desc">손은 여전히 뻗어 있지만 그 손의 쓰임이 달라집니다.
-
-앞사람을 붙잡기 위해 허둥대는 손이 아니라,
-넘어질 사람을 먼저 붙들어 주는 손(爫, 손톱조).
-
-같은 손이라도 무엇을 향해 내미느냐에 따라 마음의 모양이 달라집니다.
-
-급함은 서두름이 아니라 타인을 먼저 살피는 마음으로도 바뀔 수 있습니다.
-
-</div>
-          </div>
-          <div class="derived-card">
-            <div class="dc-top">
-              <span class="dc-char">隱</span>
-              <span class="dc-name">숨을 은</span>
-            </div>
-            <div class="dc-desc">隱은 언덕(阜)과 손, 실, 마음이 함께 있는 글자입니다.
-
-옛사람들은 숨는 것을 사라지는 일로 생각하지 않았습니다.
-
-씨앗이 흙속에 숨어 뿌리를 내리듯,
-보이지 않는 자리에서 힘을 기르는 시간이었습니다.
-
-손이 닿지 않는 것을
-억지로 붙잡으려 할수록 마음은 더 급해집니다.
-
-그러나 때로는 보이지 않는 흐름을 믿고 기다릴 줄 아는 것이 필요합니다.
-
-</div>
-          </div>
-        </div>
+    <span class="derived-label reveal">急에서 뻗어나온 한자들</span>
+    <div class="derived-grid reveal">
+      <div class="derived-cell">
+        <span class="dc-char">級</span>
+        <span class="dc-name">등급 급</span>
+        <p class="dc-desc">실(糸)과 及이 합쳐진 글자입니다. 한 가닥의 실은 짧고 가늘지만, 그 실을 하나씩 이어가면 긴 줄이 됩니다. 등급은 한 번에 뛰어오르는 높이가 아니라, 실을 잇듯 차근차근 쌓여 가는 단계입니다.</p>
+        <span class="dc-ex">階級(계급), 高級(고급)</span>
+      </div>
+      <div class="derived-cell">
+        <span class="dc-char">吸</span>
+        <span class="dc-name">숨 들이쉴 흡</span>
+        <p class="dc-desc">입(口)과 及이 만난 글자입니다. 손으로 앞사람을 붙잡으려 하기보다 먼저 숨을 들이마십니다. 급한 마음은 숨을 짧게 만들지만, 깊은 숨은 마음의 속도를 다시 몸으로 돌려놓습니다.</p>
+        <span class="dc-ex">呼吸(호흡), 吸收(흡수)</span>
+      </div>
+      <div class="derived-cell">
+        <span class="dc-char">隱</span>
+        <span class="dc-name">숨을 은</span>
+        <p class="dc-desc">언덕(阜)과 손, 실, 마음이 함께 있는 글자입니다. 씨앗이 흙 속에 숨어 뿌리를 내리듯, 보이지 않는 자리에서 힘을 기르는 시간이었습니다. 손이 닿지 않는 것을 억지로 붙잡으려 할수록 마음은 더 급해집니다. 때로는 보이지 않는 흐름을 믿고 기다릴 줄 아는 것이 필요합니다.</p>
+        <span class="dc-ex">隱居(은거), 隱德(은덕)</span>
       </div>
     </div>
   </div>
 </section>
 
 
-<!-- ══ 6. 이런 분께 ══ -->
+<!-- ══ 6. 당신이 받는 것 ══ -->
+<section class="value-section">
+  <div class="value-inner">
+    <span class="eyebrow reveal">매주 받는 것</span>
+    <h2 class="section-title reveal">세 가지가 함께<br>도착합니다</h2>
+    <div class="value-grid reveal">
+      <div class="value-cell">
+        <span class="vc-num">一</span>
+        <span class="vc-tag">한자 카드</span>
+        <span class="vc-title">오늘의 한 글자</span>
+        <p class="vc-desc">글자의 형상에서 출발하는 내면 질문. 오라클 카드처럼 한 글자가 지금 내게 필요한 것을 가리킵니다.</p>
+      </div>
+      <div class="value-cell">
+        <span class="vc-num">二</span>
+        <span class="vc-tag">파생 한자</span>
+        <span class="vc-title">뿌리에서 가지로</span>
+        <p class="vc-desc">한 글자에서 뻗어나온 다섯 개의 한자. 동아시아 언어의 맥락과 깊이를 자연스럽게 쌓아갑니다.</p>
+      </div>
+      <div class="value-cell">
+        <span class="vc-num">三</span>
+        <span class="vc-tag">저자 에세이</span>
+        <span class="vc-title">삶의 내밀한 고백</span>
+        <p class="vc-desc">저자가 직접 겪은 장면과 질문. 남의 이야기가 어느새 나의 이야기가 되는 구조로 쓰입니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ 7. 이런 분께 ══ -->
 <section class="for-section">
   <div class="for-inner">
-    <span class="section-label-hand reveal">이런 분께</span>
-    <p class="section-sub-hand reveal">당신을 위한 시간입니다</p>
+    <span class="eyebrow reveal">이런 분께</span>
+    <h2 class="section-title reveal">당신을 위한 시간입니다</h2>
     <div class="for-list reveal">
       <div class="for-item">
-        <span class="for-num">一</span>
-        <div class="for-text">
+        <span class="fi-num">一</span>
+        <div class="fi-text">
           <strong>바쁜 일상 속에서 월요일 아침만큼은 나를 위해 쓰고 싶은 분</strong>
           <span>10분의 읽기가 한 주의 중심을 세웁니다.</span>
         </div>
       </div>
       <div class="for-item">
-        <span class="for-num">二</span>
-        <div class="for-text">
+        <span class="fi-num">二</span>
+        <div class="fi-text">
           <strong>한자와 동양철학에 관심은 있지만 삶과 연결된 언어로 배우고 싶은 분</strong>
           <span>외우는 한자가 아닌, 느끼고 살아보는 글자입니다.</span>
         </div>
       </div>
       <div class="for-item">
-        <span class="for-num">三</span>
-        <div class="for-text">
+        <span class="fi-num">三</span>
+        <div class="fi-text">
           <strong>남의 이야기가 아니라 이제는 내 이야기를 찾아가고 싶은 분</strong>
           <span>에세이는 독자 자신의 장면을 소환하는 구조로 쓰입니다.</span>
         </div>
       </div>
       <div class="for-item">
-        <span class="for-num">四</span>
-        <div class="for-text">
+        <span class="fi-num">四</span>
+        <div class="fi-text">
           <strong>스스로에게 왜라고 묻는 힘을 되찾고 싶은 분</strong>
           <span>AI가 모든 답을 주는 시대일수록, 질문하는 힘이 귀해집니다.</span>
         </div>
@@ -1413,23 +1197,24 @@ details.faq-item .faq-body {
 </section>
 
 
-<!-- ══ 7. 구독 안내 + CTA ══ -->
-<section class="info-section">
-  <div class="info-inner">
-    <span class="info-label-white reveal">구독 안내 ✦</span>
-    <div class="info-grid reveal">
-      <div class="info-block">
+<!-- ══ 8. 구독 안내 ══ -->
+<section class="sub-section">
+  <div class="sub-inner">
+    <span class="eyebrow reveal">구독 안내</span>
+    <h2 class="section-title reveal">한 달의 시간, 네 번의 아침</h2>
+    <div class="sub-grid reveal">
+      <div class="sub-block">
         <h3>매주 포함되는 것</h3>
-        <ul class="info-list">
+        <ul class="sub-list">
           <li>한자 카드 — 글자의 형상과 장면</li>
           <li>파생 한자 — 한 글자에서 세계로</li>
           <li>저자 에세이 — 삶의 장면에서 출발하는 글</li>
           <li>성찰 질문 — 스스로에게 돌아오는 물음</li>
         </ul>
       </div>
-      <div class="info-block">
+      <div class="sub-block">
         <h3>구독 조건</h3>
-        <ul class="info-list">
+        <ul class="sub-list">
           <li><strong>구독 기간</strong> 2026년 8월 3일 — 8월 31일</li>
           <li><strong>구독료</strong> 월 10,000원 (총 4편)</li>
           <li><strong>신청 마감</strong> 7월 31일 자정</li>
@@ -1437,18 +1222,17 @@ details.faq-item .faq-body {
           <li><strong>전달 방식</strong> 이메일 또는 카카오톡</li>
           <li><strong>환불</strong> 시작 전 100% · 이후 잔여분</li>
         </ul>
-        <div class="notice-kitsch">
-          <strong>📌 8월 17일(월) 휴재</strong><br>
+        <div class="notice">
+          <strong>8월 17일(월) 휴재</strong><br>
           해당 호 원고는 8월 24일부터 이어집니다.
         </div>
       </div>
     </div>
-
-    <div class="cta-box reveal">
-      <span class="cta-deadline">⏰ 8월 구독 마감 · 7월 31일 자정</span>
+    <div class="cta-block reveal">
+      <span class="cta-deadline">마감 · 7월 31일 자정</span>
       <div class="cta-price">10,000원</div>
-      <div class="cta-price-sub">4주 구독 · 편당 2,500원 · 커피 한 잔의 월요일 아침</div>
-      <button class="btn-cta-kitsch" onclick="openModal()">8월 구독 신청하기</button>
+      <div class="cta-price-sub">4주 구독 · 편당 2,500원</div>
+      <button class="btn-cta" onclick="openModal()">8월 구독 신청하기</button>
       <div class="cta-note">
         지금 신청하시면 미리보기 에세이를 먼저 보내드립니다<br>
         입금 확인 후 등록이 확정됩니다
@@ -1458,76 +1242,79 @@ details.faq-item .faq-body {
 </section>
 
 
-<!-- ══ 8. 8월 테마 예고 ══ -->
+<!-- ══ 9. 8월 테마 예고 ══ -->
 <section class="theme-section">
   <div class="theme-inner">
-    <span class="section-label-hand reveal">8월 예고 — 떠난다는 것</span>
-    <p class="theme-intro-text reveal">
-      8월에는 客·異·渡·歸 네 글자를 통해 '떠남'의 의미를 함께 탐구합니다.
+    <span class="eyebrow reveal">8월 예고</span>
+    <h2 class="section-title reveal">떠난다는 것</h2>
+    <p class="theme-intro reveal">
+      8월에는 渡·異·客·歸 네 글자를 통해 떠남의 의미를 함께 탐구합니다.
       휴가철은 낯선 곳으로 떠나는 계절이지만, 떠남은 단순히 장소를 바꾸는 일이 아닙니다.
+      익숙한 일상을 벗어나고, 경계를 건너, 다시 돌아오는 과정에서
+      우리는 무언가 달라진 자신을 만납니다.
     </p>
     <div class="theme-chars reveal">
-      <div class="theme-char-card">
-        <span class="tc-char">渡</span>
+      <div class="tc-cell">
+        <span class="tc-c">渡</span>
         <div>
-          <span class="tc-name">건널 도 · 1주차</span>
-          <p class="tc-desc">지금 내가 건너야 할 경계는 무엇일까요?</p>
+          <span class="tc-n">건널 도 · 1주차 · 8월 4일</span>
+          <p class="tc-d">지금 내가 건너야 할 경계는 무엇일까요?</p>
         </div>
       </div>
-      <div class="theme-char-card">
-        <span class="tc-char">異</span>
+      <div class="tc-cell">
+        <span class="tc-c">異</span>
         <div>
-          <span class="tc-name">다를 이 · 2주차</span>
-          <p class="tc-desc">낯섦은 나를 어떻게 변화시킬까요?</p>
+          <span class="tc-n">다를 이 · 2주차 · 8월 11일</span>
+          <p class="tc-d">낯섦은 나를 어떻게 변화시킬까요?</p>
         </div>
       </div>
-      <div class="theme-char-card">
-        <span class="tc-char">客</span>
+      <div class="tc-cell">
+        <span class="tc-c">客</span>
         <div>
-          <span class="tc-name">손님 객· 3주차</span>
-          <p class="tc-desc">나는 지금 어디에서 손님으로 살아가고 있을까요?</p>
+          <span class="tc-n">손님 객 · 3주차 · 8월 24일</span>
+          <p class="tc-d">나는 지금 어디에서 손님으로 살아가고 있을까요?</p>
         </div>
       </div>
-      <div class="theme-char-card">
-        <span class="tc-char">歸</span>
+      <div class="tc-cell">
+        <span class="tc-c">歸</span>
         <div>
-          <span class="tc-name">돌아올 귀 · 4주차</span>
-          <p class="tc-desc">돌아온 나는 무엇이 달라져 있을까요?</p>
+          <span class="tc-n">돌아올 귀 · 4주차 · 8월 31일</span>
+          <p class="tc-d">돌아온 나는 무엇이 달라져 있을까요?</p>
         </div>
       </div>
     </div>
-    <div class="theme-closing-hand reveal">
+    <p class="theme-closing reveal">
       떠난다는 것은, 결국 새로운 나를 만나기 위한 길이 아니었을까.<br>
       7월을 함께해 주셔서 진심으로 감사합니다.<br>
       8월에도 매주 한 글자씩, 우리의 삶을 조금 더 깊게 바라보겠습니다.
-    </div>
+    </p>
   </div>
 </section>
 
 
-<!-- ══ 9. FAQ ══ -->
+<!-- ══ 10. FAQ ══ -->
 <section class="faq-section">
   <div class="faq-inner">
-    <span class="section-label-hand reveal">자주 묻는 질문</span>
+    <span class="eyebrow reveal">자주 묻는 질문</span>
     <div class="faq-list reveal">
       <details class="faq-item">
-        <summary>한자를 전혀 몰라도 괜찮나요?<span class="faq-icon">+</span></summary>
+        <summary>한자를 전혀 몰라도 괜찮나요?<span class="fi">+</span></summary>
         <div class="faq-body">네, 전혀 필요하지 않습니다. 글자의 형상을 장면으로 풀어내는 방식이라 처음 접하시는 분들이 오히려 더 신선하게 받아들이십니다.</div>
       </details>
       <details class="faq-item">
-        <summary>에세이는 얼마나 긴가요?<span class="faq-icon">+</span></summary>
-        <div class="faq-body">매주 약 3,000자 분량입니다. 천천히 읽으면 10분 정도 소요됩니다.</div>
+        <summary>에세이는 얼마나 긴가요?<span class="fi">+</span></summary>
+        <div class="faq-body">매주 약 3,000자 분량으로 천천히 읽으면 10분 정도 소요됩니다.</div>
       </details>
       <details class="faq-item">
-        <summary>입금은 어떻게 하나요?<span class="faq-icon">+</span></summary>
+        <summary>입금은 어떻게 하나요?<span class="fi">+</span></summary>
         <div class="faq-body">신청 완료 후 카카오페이 링크와 계좌번호를 문자로 안내드립니다. 입금 확인 후 미리보기 에세이를 먼저 보내드립니다.</div>
       </details>
       <details class="faq-item">
-        <summary>8월 17일 휴재가 궁금합니다.<span class="faq-icon">+</span></summary>
+        <summary>8월 17일 휴재가 궁금합니다.<span class="fi">+</span></summary>
         <div class="faq-body">8월 17일(월)은 발송을 쉽니다. 해당 호는 8월 24일(월)부터 이어집니다. 총 4편 발송은 동일하게 유지됩니다.</div>
       </details>
       <details class="faq-item">
-        <summary>환불 정책은 어떻게 되나요?<span class="faq-icon">+</span></summary>
+        <summary>환불 정책은 어떻게 되나요?<span class="fi">+</span></summary>
         <div class="faq-body">구독 시작 전 100% 환불 가능합니다. 시작 후에는 사용 기간을 정산한 잔여금이 환불됩니다.</div>
       </details>
     </div>
@@ -1535,16 +1322,33 @@ details.faq-item .faq-body {
 </section>
 
 
+<!-- ══ 11. 저자 상세 ══ -->
+<section class="author-detail">
+  <div class="author-detail-inner">
+    <span class="eyebrow reveal">저자 소개</span>
+    <h2 class="author-detail-name reveal">고석수</h2>
+    <p class="author-detail-role reveal">
+      작가 · 산소모험스쿨 · 철학인문학 대안학교 지혜학교 교사<br>
+      집필 중 《한 글자 한 세계》
+    </p>
+    <div class="author-detail-bio">
+      <p class="reveal">"나는 누구일까?" — 아직도 일곱 살의 질문이 기억납니다. 꼼지락거리는 작은 손바닥을 보며 너무 궁금했습니다. 명문대, 대기업을 쫓았지만 해소되지 않는 갈증은 여전했습니다.</p>
+      <p class="reveal d1">저는 길을 나섰습니다. 서아시아에서 시작한 방황 끝에 대만과 일본에 머물게 되었죠. 비로소 <strong>동아시아라는 장소와 그곳에 뿌리내린 한자(漢字)를 성찰</strong>할 수 있었습니다.</p>
+      <p class="reveal d2">도시와 시골, 한국과 동아시아를 오가며 살고 있습니다. 다년간의 통역과 여행 기획 경험이 이 여정의 밑거름이 되었고, 현재 '산소모험스쿨'에서 생태와 마음을 잇는 프로그램을 나누고 있습니다.</p>
+      <p class="reveal d3">동양철학과 한자를 사랑합니다. 글쓰기를 통해 감정을 느끼고, 다국어 환경 속에서 비로소 <strong>감정과 닿은 '한 자'의 깨달음</strong>을 얻습니다. 팬데믹 이후 한국으로 돌아온 지금, 매일 아침 이 탐구와 성찰을 습관처럼 지속하고 있습니다.</p>
+    </div>
+  </div>
+</section>
+
+
 <!-- ══ 푸터 CTA ══ -->
 <footer class="footer-cta">
-  <div class="footer-inner">
-    <p class="footer-slogan">
-      월요일 아침<br>
-      <em>함께 마음의 순간을 읽어나가</em>
-    </p>
-    <button class="btn-footer" onclick="openModal()">8월 구독 신청하기 — 10,000원</button>
-    <p class="footer-deadline">마감 · 2026년 7월 31일 자정 · 입금 후 확정</p>
-  </div>
+  <p class="footer-slogan reveal">
+    월요일 아침, 차 한 잔을 앞에 두고<br>
+    <em>한 글자와 단둘이 앉는 시간.</em>
+  </p>
+  <button class="btn-cta reveal" onclick="openModal()">8월 구독 신청하기 — 10,000원</button>
+  <p class="footer-deadline reveal">마감 · 2026년 7월 31일 자정 · 입금 후 확정</p>
 </footer>
 
 
@@ -1564,7 +1368,7 @@ details.faq-item .faq-body {
 </div>
 
 <div class="floating-btn" id="floatingBtn">
-  <button onclick="openModal()">8월 구독 — 10,000원 →</button>
+  <button onclick="openModal()">8월 구독 신청 — 10,000원 →</button>
 </div>
 
 <script>
@@ -1579,7 +1383,7 @@ function closeModal() {
 function handleModalClick(e) {
   if (e.target === document.getElementById('modal')) closeModal();
 }
-const reveals = document.querySelectorAll('.reveal, .reveal-r');
+const reveals = document.querySelectorAll('.reveal');
 const obs = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); obs.unobserve(e.target); } });
 }, { threshold: 0.08 });
