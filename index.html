@@ -142,8 +142,8 @@ footer{text-align:center;padding:26px;color:#9a8f84;font-size:11px;background:#f
   <h2 style="margin:8px 0 8px">한 글자에,<br>각자의 이야기가 이어집니다.</h2>
   <p style="color:var(--mid);font-size:14px;line-height:1.75;margin-bottom:0">읽고 끝나는 대신, 독자들은 자신의 장면과 생각을 다시 글로 건넵니다.</p>
   <div class="quotes">
-   <div class="quote">석수님의 질문 덕분에 '조심하는 사랑'을 문장으로 한 번 적어봅니다.<span>독자 이야기 · 愛</span></div>
-   <div class="quote">어제 우리는 모두 그 두려움을 안은채 작은 강을 건넜습니다. 말로 표현은 못했지만 석수님이 말하는 마음들을 모두 갖고 건넜겠다 싶습니다. 이 동시성에 위로받습니다. 고맙습니다.<span>독자 이야기 · 문턱 앞에서</span></div>
+   <div class="quote">타마의 질문 덕분에 '조심하는 사랑'을 문장으로 한 번 적어봅니다.<span>독자 이야기 · 愛</span></div>
+   <div class="quote">어제 우리는 모두 그 두려움을 안은채 작은 강을 건넜습니다. 말로 표현은 못했지만 타마가 말하는 마음들을 모두 갖고 건넜겠다 싶습니다. 이 동시성에 위로받습니다. 고맙습니다.<span>독자 이야기 · 문턱 앞에서</span></div>
    <div class="quote">요즘 제가 마음이 향하는 자리는 제자신입니다. 역할이 많고 그걸 수행하느라 짖눌린 마음을 청송에 다녀오면서 이불털듯 한 번 탁 털어낸듯합니다. 고맙습니다.<span>독자 이야기 · 마음이 향하는 자리</span></div>
    <div class="quote">問 한자를 보니 양 옆의 대문이 우리 가슴의 흉골처럼 보였습니다. 마음의 문을 열었을 때, 비로소 진짜 질문이 나오는 것이 아닐까. 그 질문이 오늘도 나를 움직이게 합니다.<span>독자 이야기 · 問</span></div>
   </div>
@@ -221,5 +221,70 @@ function outside(e,id){if(e.target.id===id)closeModal(id)}
 document.addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelectorAll('.modal.open').forEach(m=>closeModal(m.id))})
 window.addEventListener('scroll',()=>document.getElementById('floating').classList.toggle('show',window.scrollY>700))
 </script>
+<!-- AUTO_SYNC_LANDING_V1 -->
+<script>
+(() => {
+  const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTFeV62s_6Cj7ceswk6z42DgAjS1f7ELg1TMYnt_MV0z-eGWzqC9egmFWaMhoT3Qr5_lpEAJJ8Ltuke/pub?gid=66521910&single=true&output=csv';
+  const esc = (v='') => String(v).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  function parseCSV(text){
+    const rows=[]; let row=[], field='', quoted=false;
+    for(let i=0;i<text.length;i++){
+      const c=text[i], n=text[i+1];
+      if(quoted){
+        if(c==='"' && n==='"'){ field+='"'; i++; }
+        else if(c==='"') quoted=false;
+        else field+=c;
+      } else {
+        if(c==='"') quoted=true;
+        else if(c===','){ row.push(field); field=''; }
+        else if(c==='\n'){ row.push(field.replace(/\r$/,'')); rows.push(row); row=[]; field=''; }
+        else field+=c;
+      }
+    }
+    if(field.length || row.length){ row.push(field.replace(/\r$/,'')); rows.push(row); }
+    return rows;
+  }
+  const won = v => Number(String(v).replace(/[^0-9.-]/g,'')).toLocaleString('ko-KR');
+  function render(rows){
+    const metaHeader=rows.find(r=>r[0]==='META' && r[1]==='currentMonth');
+    const metaRow=rows.find(r=>r[0]==='META' && r[1] && r[1]!=='currentMonth');
+    if(!metaHeader || !metaRow) throw new Error('META data missing');
+    const meta={}; metaHeader.forEach((k,i)=>{ if(k) meta[k]=metaRow[i]||''; });
+    const cards=rows.filter(r=>r[0]==='CARD').map(r=>({date:r[1]||'',hanja:r[2]||'',reading:r[3]||'',short:r[4]||'',question:r[5]||'',prompt:r[6]||'',oneLine:r[7]||'',approvedText:r[8]||'',month:r[9]||'',week:r[10]||''})).sort((a,b)=>Number(a.week)-Number(b.week));
+    const reviews=rows.filter(r=>r[0]==='REVIEW').map(r=>({month:r[1]||'',label:r[2]||'',excerpt:r[3]||'',type:r[4]||'',order:r[5]||'',public:r[6]||''})).filter(r=>String(r.public).toUpperCase()==='TRUE').sort((a,b)=>Number(a.order)-Number(b.order));
+    if(!cards.length) throw new Error('No approved cards');
+    const [year,mm]=String(meta.currentMonth||cards[0].month).split('-');
+    const monthNum=Number(mm), monthLabel=monthNum+'월', price=won(meta.price||10000), issueCount=meta.issueCount||cards.length, chars=cards.map(c=>c.hanja).join(' · '), first=cards[0];
+    document.title='한자의 아침 · '+year+'년 '+monthLabel;
+    const heroKicker=document.querySelector('.hero .kicker'); if(heroKicker) heroKicker.textContent='한자의 아침 · '+year+'년 '+monthLabel;
+    const heroChars=document.querySelector('.hero .chars'); if(heroChars) heroChars.innerHTML=cards.map(c=>'<span>'+esc(c.hanja)+'</span>').join('');
+    const heroPrimary=document.querySelector('.hero .hero-actions .btn:first-child'); if(heroPrimary) heroPrimary.textContent=monthLabel+' 한자의 아침 시작하기 →';
+    const heroMeta=document.querySelector('.hero .hero-meta'); if(heroMeta) heroMeta.textContent='월 '+price+'원 · 총 '+issueCount+'편 · 매주 월요일 아침';
+    const monthSection=document.querySelector('section.month');
+    if(monthSection){
+      const k=monthSection.querySelector('.kicker'); if(k) k.textContent=year+'.'+String(monthNum).padStart(2,'0')+' · FOUR QUESTIONS';
+      const h=monthSection.querySelector('h2'); if(h) h.textContent=(meta.monthlyTitle||monthLabel+' · '+(meta.theme||'')).replace(' · ', ', ');
+      const p=monthSection.querySelector('.month-head p'); if(p) p.textContent=chars;
+      const grid=monthSection.querySelector('.cards'); if(grid) grid.innerHTML=cards.map(c=>'<article class="card"><div class="char">'+esc(c.hanja)+'</div><div class="read">'+esc(c.reading)+'</div><p>'+esc(c.question)+'</p></article>').join('');
+    }
+    const quotes=document.querySelector('.proof .quotes'); if(quotes && reviews.length) quotes.innerHTML=reviews.map(r=>'<div class="quote">'+esc(r.excerpt)+'<span>독자 이야기 · '+esc(r.label)+'</span></div>').join('');
+    const offer=document.querySelector('section.offer');
+    if(offer){
+      const k=offer.querySelector('.kicker'); if(k) k.textContent=year+'.'+String(monthNum).padStart(2,'0')+' SUBSCRIPTION';
+      const h=offer.querySelector('h2'); if(h) h.innerHTML=esc(monthLabel)+', '+esc(issueCount)+'번의 월요일을<br>나를 기록하는 시간으로';
+      const facts=offer.querySelectorAll('.fact'); if(facts[0]) facts[0].textContent=chars; if(facts[1]) facts[1].textContent='총 '+issueCount+'편';
+      const pe=offer.querySelector('.price'); if(pe) pe.textContent='월 '+price+'원'; const b=offer.querySelector('.btn'); if(b) b.textContent=monthLabel+' 한자의 아침 시작하기 →';
+    }
+    const floating=document.querySelector('#floating .btn'); if(floating) floating.textContent=monthLabel+' 시작하기 · '+price+'원 →';
+    const q=document.getElementById('questionModal'); if(q){ const bc=q.querySelector('.bigchar'); if(bc) bc.textContent=first.hanja; const rd=q.querySelector('.reading'); if(rd) rd.textContent=first.reading+' · '+monthLabel+' 첫 번째 글'; const qb=q.querySelector('.question-box'); if(qb) qb.textContent=first.question; const pr=q.querySelector('.prompt'); if(pr) pr.innerHTML=esc(first.prompt)+' <strong>300~500자</strong>면 충분합니다.'; }
+    const e=document.getElementById('essayModal'); if(e){ const t=e.querySelector('.essay-title'); if(t) t.textContent=first.hanja+' · '+first.short; const rd=e.querySelector('.reading'); if(rd) rd.textContent=monthLabel+' 첫 번째 글 미리보기'; const body=e.querySelector('.essay-body'); if(body) body.textContent=first.approvedText; const note=e.querySelector('.essay-note'); if(note) note.textContent=monthLabel+' 첫 번째 글에서 만나게 될 한자 이야기를 미리 보여드립니다.'; const b=e.querySelector('.btn'); if(b) b.textContent=monthLabel+' 함께 읽기 →'; }
+    const apply=document.getElementById('applyModal'); if(apply){ const title=apply.querySelector('.modalhead strong'); if(title) title.textContent='한자의 아침 · '+monthLabel+' 신청'; const iframe=apply.querySelector('iframe'); if(iframe) iframe.title='한자의 아침 '+monthLabel+' 신청폼'; }
+    document.documentElement.dataset.landingSync='ok';
+  }
+  fetch(CSV_URL+'&_='+Date.now(),{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error('CSV '+r.status);return r.text();}).then(t=>render(parseCSV(t))).catch(err=>{console.error('[한자의 아침 자동동기화]',err);document.documentElement.dataset.landingSync='fallback';});
+})();
+</script>
+<!-- /AUTO_SYNC_LANDING_V1 -->
+
 </body>
 </html>
